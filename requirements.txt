@@ -14,6 +14,7 @@ argparse>=1.4.0
 torch>=2.0.0
 transformers>=4.30.0
 accelerate>=0.20.0
+safetensors>=0.4.0  # For secure model serialization
 
 # Evaluation metrics
 scikit-learn>=1.3.0
