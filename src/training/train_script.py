@@ -15,8 +15,17 @@ import sys
 import torch
 import pandas as pd
 
-from .train import ModelTrainer, TrainingConfig
-from .data_loader import ProcessedDataLoader
+# Handle both direct execution and module import
+try:
+    from .train import ModelTrainer, TrainingConfig
+    from .data_loader import ProcessedDataLoader
+except ImportError:
+    # Direct execution - add parent directory to path
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    from src.training.train import ModelTrainer, TrainingConfig
+    from src.training.data_loader import ProcessedDataLoader
 
 
 # Configure logging

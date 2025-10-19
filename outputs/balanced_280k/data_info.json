@@ -1,0 +1,11 @@
+{
+  "train_size": 196000,
+  "val_size": 28000,
+  "test_size": 56000,
+  "train_human": 98000,
+  "train_ai": 98000,
+  "val_human": 14000,
+  "val_ai": 14000,
+  "test_human": 28000,
+  "test_ai": 28000
+}

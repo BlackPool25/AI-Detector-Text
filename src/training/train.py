@@ -1099,7 +1099,9 @@ class ModelTrainer:
             train_dataset,
             batch_size=self.config.per_device_train_batch_size,
             sampler=RandomSampler(train_dataset),
-            num_workers=0,
+            num_workers=4,
+            pin_memory=True,
+            persistent_workers=True,
         )
         
         # Prepare validation
@@ -1120,7 +1122,8 @@ class ModelTrainer:
                 val_dataset,
                 batch_size=self.config.per_device_train_batch_size * 2,
                 sampler=SequentialSampler(val_dataset),
-                num_workers=0,
+                num_workers=2,
+                pin_memory=True,
             )
         
         # Calculate number of training steps

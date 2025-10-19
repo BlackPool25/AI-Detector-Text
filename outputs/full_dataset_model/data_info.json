@@ -1,0 +1,11 @@
+{
+  "train_size": 1310753,
+  "val_size": 187251,
+  "test_size": 374501,
+  "train_human": 699710,
+  "train_ai": 611043,
+  "val_human": 99959,
+  "val_ai": 87292,
+  "test_human": 199917,
+  "test_ai": 174584
+}

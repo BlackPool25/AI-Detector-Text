@@ -63,23 +63,41 @@ class ProcessedDataLoader:
         """
         parquet_files = {}
         
-        # Find AI-generated text files
-        ai_dir = self.data_dir / "ai" / "RAID-Dataset"
-        if ai_dir.exists():
-            for model_dir in ai_dir.iterdir():
-                if model_dir.is_dir():
-                    files = list(model_dir.glob("*.parquet"))
-                    if files:
-                        parquet_files[f"ai_{model_dir.name}"] = sorted(files)
+        # Check if data is in train subdirectory (processed_data/train/ai/) or root (processed_data/ai/)
+        train_subdir = self.data_dir / "train"
+        base_dir = train_subdir if train_subdir.exists() else self.data_dir
+        
+        # Find AI-generated text files - check multiple dataset structures
+        ai_dirs = [
+            base_dir / "ai" / "RAID-Dataset",
+            base_dir / "ai" / "dmitva-dataset",
+            base_dir / "ai" / "AI-Vs-Real-Dataset",
+        ]
+        
+        for ai_dir in ai_dirs:
+            if ai_dir.exists():
+                for model_dir in ai_dir.iterdir():
+                    if model_dir.is_dir():
+                        files = list(model_dir.glob("*.parquet"))
+                        if files:
+                            # Use just the model name as key (e.g., "gpt4" instead of "ai_gpt4")
+                            parquet_files[model_dir.name] = sorted(files)
         
         # Find real/human text files
-        real_dir = self.data_dir / "real" / "RAID-Dataset"
-        if real_dir.exists():
-            for category_dir in real_dir.iterdir():
-                if category_dir.is_dir():
-                    files = list(category_dir.glob("*.parquet"))
-                    if files:
-                        parquet_files[f"real_{category_dir.name}"] = sorted(files)
+        real_dirs = [
+            base_dir / "real" / "RAID-Dataset",
+            base_dir / "real" / "dmitva-dataset",
+            base_dir / "real" / "AI-Vs-Real-Dataset",
+            base_dir / "real" / "Wikipedia_C4-Web",
+        ]
+        
+        for real_dir in real_dirs:
+            if real_dir.exists():
+                for category_dir in real_dir.iterdir():
+                    if category_dir.is_dir():
+                        files = list(category_dir.glob("*.parquet"))
+                        if files:
+                            parquet_files[f"real_{category_dir.name}"] = sorted(files)
         
         logger.info(f"Found parquet files in {len(parquet_files)} categories")
         for category, files in parquet_files.items():
@@ -208,18 +226,25 @@ class ProcessedDataLoader:
         """
         parquet_files = self.find_parquet_files()
         
-        # Find model files
-        ai_key = f"ai_{model_name}"
-        human_key = "real_human"
+        # Find model files - check both with and without 'ai_' prefix
+        ai_key = model_name if model_name in parquet_files else f"ai_{model_name}"
+        human_key = "real_human" if "real_human" in parquet_files else "human"
         
         if ai_key not in parquet_files:
-            raise ValueError(f"Model {model_name} not found in processed data")
+            available_models = [k for k in parquet_files.keys() if not k.startswith('real_')]
+            raise ValueError(
+                f"Model {model_name} not found in processed data. "
+                f"Available models: {', '.join(available_models)}"
+            )
         
         if human_key not in parquet_files:
             raise ValueError(f"Human text data not found in processed data")
         
         ai_files = parquet_files[ai_key]
         human_files = parquet_files[human_key]
+        
+        logger.info(f"Loading {len(ai_files)} AI files for model '{model_name}'")
+        logger.info(f"Loading {len(human_files)} human files")
         
         return self.load_balanced_dataset(
             ai_files=ai_files,
