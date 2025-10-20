@@ -1,0 +1,55 @@
+2025-10-19 19:39:50,862 - __main__ - INFO - ================================================================================
+2025-10-19 19:39:50,862 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 19:39:50,862 - __main__ - INFO - ================================================================================
+2025-10-19 19:39:50,862 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 19:39:50,863 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 19:39:50,863 - __main__ - INFO - Training Configuration:
+2025-10-19 19:39:50,863 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 19:39:50,863 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 19:39:50,863 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 19:39:50,863 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 19:39:50,863 - __main__ - INFO -   attention_pooling: True
+2025-10-19 19:39:50,863 - __main__ - INFO -   dropout: 0.4
+2025-10-19 19:39:50,863 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 19:39:50,863 - __main__ - INFO -   per_device_train_batch_size: 8
+2025-10-19 19:39:50,863 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 19:39:50,863 - __main__ - INFO -   num_train_epochs: 1
+2025-10-19 19:39:50,863 - __main__ - INFO -   max_steps: None
+2025-10-19 19:39:50,863 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 19:39:50,863 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 19:39:50,863 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 19:39:50,863 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 19:39:50,863 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 19:39:50,863 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 19:39:50,863 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 19:39:50,863 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 19:39:50,863 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 19:39:50,863 - __main__ - INFO -   fp16: False
+2025-10-19 19:39:50,863 - __main__ - INFO -   bf16: True
+2025-10-19 19:39:50,863 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 19:39:50,863 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 19:39:50,863 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 19:39:50,863 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 19:39:50,863 - __main__ - INFO -   use_ema: True
+2025-10-19 19:39:50,863 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 19:39:50,863 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 19:39:50,863 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 19:39:50,863 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 19:39:50,863 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 19:39:50,863 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 19:39:50,863 - __main__ - INFO -   logging_steps: 100
+2025-10-19 19:39:50,863 - __main__ - INFO -   device: cuda
+2025-10-19 19:39:50,863 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:39:50,863 - __main__ - INFO - Loading Data
+2025-10-19 19:39:50,863 - __main__ - INFO - ================================================================================
+2025-10-19 19:39:50,863 - src.training.data_loader - WARNING - Metadata file not found at processed_data/statistics.json
+2025-10-19 19:39:50,864 - __main__ - INFO - Processed Data Summary:
+2025-10-19 19:39:50,864 - __main__ - INFO -   total_samples: 0
+2025-10-19 19:39:50,864 - __main__ - INFO -   human_samples: 0
+2025-10-19 19:39:50,864 - __main__ - INFO -   ai_samples: 0
+2025-10-19 19:39:50,864 - __main__ - INFO -   ai_models: []
+2025-10-19 19:39:50,864 - __main__ - INFO -   domains: []
+2025-10-19 19:39:50,864 - __main__ - INFO -   text_length_stats: {}
+2025-10-19 19:39:50,864 - __main__ - INFO - Loading data for model: gpt4
+2025-10-19 19:39:50,864 - src.training.data_loader - INFO - Found parquet files in 0 categories
