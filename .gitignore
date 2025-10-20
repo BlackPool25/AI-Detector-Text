@@ -40,8 +40,14 @@ data/
 processed_data/
 !data/samples/*.csv
 
-# Logs
-*.log
+# Model outputs and checkpoints (too large for git/LFS - 13GB total)
+outputs/
+!outputs/README.md
+!outputs/*/data_info.json
+!outputs/*/results.json
+
+# Logs (uncomment to exclude)
+# *.log
 
 # OS
 .DS_Store
