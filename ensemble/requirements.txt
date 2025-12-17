@@ -1,0 +1,28 @@
+# AI Text Detection Ensemble - Requirements
+# Self-contained package for AI text detection
+
+# Core dependencies
+torch>=2.0.0
+transformers>=4.31.0
+numpy>=1.24.0
+
+# FAISS for KNN search (DeTeCtive)
+# Use faiss-cpu for compatibility (works on AMD GPUs)
+faiss-cpu>=1.7.4
+
+# Tokenization
+sentencepiece>=0.1.99
+
+# API (for Modal deployment)
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+
+# Progress bars
+tqdm>=4.66.0
+
+# Development/Testing
+pytest>=7.0.0
+httpx>=0.25.0  # For testing FastAPI
+
+datasets>=2.19.0  # For loading test data

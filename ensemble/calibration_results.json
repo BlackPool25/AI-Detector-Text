@@ -1,0 +1,181 @@
+{
+  "total": 99,
+  "correct": 85,
+  "incorrect": 11,
+  "uncertain": 3,
+  "false_positives": [
+    {
+      "text_preview": "Plug-in (computing) , a piece of software which enhances another software application and usually cannot be run independentlyBrowser extension , which...",
+      "source": "HC3/open_qa.jsonl",
+      "confidence": 1.0,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "AI",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "Amazon.com, Inc. (/ˈæməzɒn/ AM-ə-zon) is an American multinational technology company focusing on e-commerce, cloud computing, online advertising, dig...",
+      "source": "HC3/wiki_csai.jsonl",
+      "confidence": 1.0,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "AI",
+        "fast_detect": "Human"
+      }
+    }
+  ],
+  "false_negatives": [
+    {
+      "text_preview": "I'd distinguish between different questions here:\n\n**Can suffering be eliminated entirely?** Probably not without fundamentally changing what it means...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.6,
+      "breakdown": {
+        "detective": "Human",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "# FAQ Accordion Section\n\nHere's a complete, responsive FAQ accordion with smooth animations:\n\n## HTML\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.8433019674782887,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "I don't see any information about gardens in your question. Could you please provide details about the gardens you'd like me to compare? For example:\n...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.95,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "# The Transformative Impact of Artificial Intelligence\n\nArtificial intelligence has emerged as one of the most consequential technologies of our era, ...",
+      "source": "GPT-4 formal essay",
+      "confidence": 0.8347018382376835,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "I'd say it's likely **both**, in ways that are hard to separate:\n\n**Rational elements:**\n- Loss of all future experiences, relationships, projects\n- E...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.6,
+      "breakdown": {
+        "detective": "Human",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "# Simple Learning Chatbot\n\nHere's a Python chatbot that learns from conversations using basic machine learning:\n\n```python\nimport json\nimport pickle\ni...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.95,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "Looking at this step-by-step:\n\n**Step 1: Find the product of 56 and 77**\n56 × 77 = 4,312\n\n**Step 2: Find the sum of 12 and 13**\n12 + 13 = 25\n\n**Step 3...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.6,
+      "breakdown": {
+        "detective": "Human",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "# Sudoku Solver using Backtracking Algorithm\n\n```python\ndef print_board(board):\n    \"\"\"\n    Print the Sudoku board in a readable format\n    \"\"\"\n    fo...",
+      "source": "Claude-4.5-reasoning",
+      "confidence": 0.85,
+      "breakdown": {
+        "detective": "Human",
+        "binoculars": "AI",
+        "fast_detect": "Human"
+      }
+    },
+    {
+      "text_preview": "*The Dawn of Intelligent Machines*\n\nArtificial intelligence has quietly woven itself into the fabric of our daily lives, transforming how we work, com...",
+      "source": "GPT-4 style (user sample)",
+      "confidence": 0.8347469306115869,
+      "breakdown": {
+        "detective": "AI",
+        "binoculars": "Human",
+        "fast_detect": "Human"
+      }
+    }
+  ],
+  "by_source": {
+    "HC3/finance.jsonl": {
+      "total": 10,
+      "correct": 10
+    },
+    "Claude-4.5-reasoning": {
+      "total": 30,
+      "correct": 21
+    },
+    "Generated formal education essay": {
+      "total": 1,
+      "correct": 1
+    },
+    "GPT-essays-dataset": {
+      "total": 30,
+      "correct": 30
+    },
+    "HC3/open_qa.jsonl": {
+      "total": 10,
+      "correct": 9
+    },
+    "Medical note": {
+      "total": 1,
+      "correct": 1
+    },
+    "HC3/wiki_csai.jsonl": {
+      "total": 10,
+      "correct": 8
+    },
+    "Claude-style (user sample)": {
+      "total": 1,
+      "correct": 1
+    },
+    "Personal narrative": {
+      "total": 1,
+      "correct": 1
+    },
+    "GPT-4 formal essay": {
+      "total": 1,
+      "correct": 0
+    },
+    "Academic anecdote": {
+      "total": 1,
+      "correct": 1
+    },
+    "Casual text/social media": {
+      "total": 1,
+      "correct": 1
+    },
+    "Academic writing": {
+      "total": 1,
+      "correct": 1
+    },
+    "GPT-4 style (user sample)": {
+      "total": 1,
+      "correct": 0
+    }
+  },
+  "accuracy": 0.8585858585858586,
+  "fp_rate": 0.020202020202020204,
+  "fn_rate": 0.09090909090909091
+}

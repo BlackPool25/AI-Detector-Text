@@ -1,0 +1,72 @@
+# ensemble/.gitignore
+# Purpose: keep source files tracked, ignore large generated files, caches, and local env
+
+# Bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtualenvs and env files
+.env
+.env.*
+.venv/
+venv/
+venv*/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Model weights, checkpoints and large binaries
+# Keep source code in repo; ignore heavy model files
+models/
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.tar.gz
+
+# FAISS / database indexes and raw datasets
+database/
+*.faiss
+index*.faiss
+*.index
+*.npy
+label_dict.pkl
+
+# Cache directories (huggingface, transformers, runners)
+cache/
+hf_cache/
+.cache/
+
+# Experiment outputs, artifacts
+outputs/
+results/
+runs/
+checkpoints/
+
+# Modal / local mounts and generated files
+.modal/
+modal_*.py
+mounts/
+
+# Misc
+*.sqlite3
+*.db
+*.log
+*.csv
+*.zip
+
+# If you need to keep a specific model or DB file tracked, add a negation rule below
+# Example: to track a small helper file: !models/small-helper.txt
