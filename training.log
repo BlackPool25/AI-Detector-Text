@@ -1,0 +1,1630 @@
+2025-10-18 21:46:50,232 - __main__ - INFO - ================================================================================
+2025-10-18 21:46:50,232 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-18 21:46:50,232 - __main__ - INFO - ================================================================================
+2025-10-18 21:46:50,232 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-18 21:46:50,232 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-18 21:46:50,232 - __main__ - INFO - Training Configuration:
+2025-10-18 21:46:50,232 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-18 21:46:50,232 - __main__ - INFO -   freeze_embeddings: True
+2025-10-18 21:46:50,233 - __main__ - INFO -   lstm_layers: 2
+2025-10-18 21:46:50,233 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-18 21:46:50,233 - __main__ - INFO -   attention_pooling: True
+2025-10-18 21:46:50,233 - __main__ - INFO -   dropout: 0.4
+2025-10-18 21:46:50,233 - __main__ - INFO -   max_seq_length: 128
+2025-10-18 21:46:50,233 - __main__ - INFO -   per_device_train_batch_size: 4
+2025-10-18 21:46:50,233 - __main__ - INFO -   gradient_accumulation_steps: 2
+2025-10-18 21:46:50,233 - __main__ - INFO -   num_train_epochs: 1
+2025-10-18 21:46:50,233 - __main__ - INFO -   max_steps: None
+2025-10-18 21:46:50,233 - __main__ - INFO -   optimizer: AdamW
+2025-10-18 21:46:50,233 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-18 21:46:50,233 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-18 21:46:50,233 - __main__ - INFO -   weight_decay: 0.01
+2025-10-18 21:46:50,233 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-18 21:46:50,233 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-18 21:46:50,233 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-18 21:46:50,233 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-18 21:46:50,233 - __main__ - INFO -   warmup_steps: 10
+2025-10-18 21:46:50,233 - __main__ - INFO -   fp16: True
+2025-10-18 21:46:50,233 - __main__ - INFO -   bf16: True
+2025-10-18 21:46:50,233 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-18 21:46:50,233 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-18 21:46:50,233 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-18 21:46:50,233 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-18 21:46:50,233 - __main__ - INFO -   use_ema: True
+2025-10-18 21:46:50,233 - __main__ - INFO -   ema_decay: 0.999
+2025-10-18 21:46:50,233 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-18 21:46:50,233 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-18 21:46:50,233 - __main__ - INFO -   save_total_limit: 3
+2025-10-18 21:46:50,233 - __main__ - INFO -   save_strategy: epoch
+2025-10-18 21:46:50,233 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-18 21:46:50,233 - __main__ - INFO -   logging_steps: 100
+2025-10-18 21:46:50,233 - __main__ - INFO -   device: cuda
+2025-10-18 21:46:50,233 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:46:50,233 - __main__ - INFO - Loading Data
+2025-10-18 21:46:50,233 - __main__ - INFO - ================================================================================
+2025-10-18 21:46:50,233 - __main__ - INFO - Processed Data Summary:
+2025-10-18 21:46:50,233 - __main__ - INFO -   total_samples: 5508125
+2025-10-18 21:46:50,233 - __main__ - INFO -   human_samples: 158078
+2025-10-18 21:46:50,233 - __main__ - INFO -   ai_samples: 5350047
+2025-10-18 21:46:50,233 - __main__ - INFO -   ai_models: ['llama-chat', 'mpt', 'mistral', 'mistral-chat', 'gpt2', 'mpt-chat', 'gpt3', 'cohere', 'chatgpt', 'gpt4', 'cohere-chat']
+2025-10-18 21:46:50,233 - __main__ - INFO -   domains: ['abstracts', 'books', 'news', 'poetry', 'recipes', 'reddit', 'reviews', 'wiki']
+2025-10-18 21:46:50,233 - __main__ - INFO -   text_length_stats: {'min': 12, 'max': 19368, 'mean': 1553.901754385965, 'median': 1440}
+2025-10-18 21:46:50,233 - __main__ - INFO - Loading data for model: gpt4
+2025-10-18 21:46:50,235 - src.training.data_loader - INFO - Found parquet files in 12 categories
+2025-10-18 21:46:50,235 - src.training.data_loader - INFO -   ai_gpt3: 43 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_mpt-chat: 57 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_mistral-chat: 56 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_gpt4: 43 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_cohere: 43 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_cohere-chat: 43 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_llama-chat: 56 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_mpt: 57 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_mistral: 56 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_gpt2: 56 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   ai_chatgpt: 43 files
+2025-10-18 21:46:50,236 - src.training.data_loader - INFO -   real_human: 31 files
+2025-10-18 21:46:52,256 - src.training.data_loader - INFO - Loaded total 318557 rows from 43 files
+2025-10-18 21:46:52,264 - src.training.data_loader - INFO - Downsampled to 100 rows
+2025-10-18 21:46:53,140 - src.training.data_loader - INFO - Loaded total 158078 rows from 31 files
+2025-10-18 21:46:53,143 - src.training.data_loader - INFO - Downsampled to 100 rows
+2025-10-18 21:46:53,160 - src.training.data_loader - INFO - Combined dataset: 200 samples (100 human, 100 AI)
+2025-10-18 21:46:53,161 - src.training.data_loader - INFO - Split: Train=140, Val=20, Test=40
+2025-10-18 21:46:53,161 - src.training.data_loader - INFO - Train - Human: 70, AI: 70
+2025-10-18 21:46:53,162 - src.training.data_loader - INFO - Val   - Human: 10, AI: 10
+2025-10-18 21:46:53,162 - src.training.data_loader - INFO - Test  - Human: 20, AI: 20
+2025-10-18 21:46:53,162 - __main__ - INFO - 
+Dataset sizes:
+2025-10-18 21:46:53,162 - __main__ - INFO -   Train: 140
+2025-10-18 21:46:53,162 - __main__ - INFO -   Val:   20
+2025-10-18 21:46:53,162 - __main__ - INFO -   Test:  40
+2025-10-18 21:47:17,704 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:17,704 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-18 21:47:17,704 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:17,705 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-18 21:47:17,705 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-18 21:47:17,705 - __main__ - INFO - Training Configuration:
+2025-10-18 21:47:17,705 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-18 21:47:17,705 - __main__ - INFO -   freeze_embeddings: True
+2025-10-18 21:47:17,705 - __main__ - INFO -   lstm_layers: 2
+2025-10-18 21:47:17,705 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-18 21:47:17,705 - __main__ - INFO -   attention_pooling: True
+2025-10-18 21:47:17,705 - __main__ - INFO -   dropout: 0.4
+2025-10-18 21:47:17,705 - __main__ - INFO -   max_seq_length: 128
+2025-10-18 21:47:17,705 - __main__ - INFO -   per_device_train_batch_size: 4
+2025-10-18 21:47:17,705 - __main__ - INFO -   gradient_accumulation_steps: 2
+2025-10-18 21:47:17,705 - __main__ - INFO -   num_train_epochs: 1
+2025-10-18 21:47:17,705 - __main__ - INFO -   max_steps: None
+2025-10-18 21:47:17,705 - __main__ - INFO -   optimizer: AdamW
+2025-10-18 21:47:17,705 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-18 21:47:17,705 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-18 21:47:17,705 - __main__ - INFO -   weight_decay: 0.01
+2025-10-18 21:47:17,705 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-18 21:47:17,705 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-18 21:47:17,705 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-18 21:47:17,706 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-18 21:47:17,706 - __main__ - INFO -   warmup_steps: 10
+2025-10-18 21:47:17,706 - __main__ - INFO -   fp16: False
+2025-10-18 21:47:17,706 - __main__ - INFO -   bf16: True
+2025-10-18 21:47:17,706 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-18 21:47:17,706 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-18 21:47:17,706 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-18 21:47:17,706 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-18 21:47:17,706 - __main__ - INFO -   use_ema: True
+2025-10-18 21:47:17,706 - __main__ - INFO -   ema_decay: 0.999
+2025-10-18 21:47:17,706 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-18 21:47:17,706 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-18 21:47:17,706 - __main__ - INFO -   save_total_limit: 3
+2025-10-18 21:47:17,706 - __main__ - INFO -   save_strategy: epoch
+2025-10-18 21:47:17,706 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-18 21:47:17,706 - __main__ - INFO -   logging_steps: 100
+2025-10-18 21:47:17,706 - __main__ - INFO -   device: cuda
+2025-10-18 21:47:17,706 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:47:17,706 - __main__ - INFO - Loading Data
+2025-10-18 21:47:17,706 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:17,706 - __main__ - INFO - Processed Data Summary:
+2025-10-18 21:47:17,706 - __main__ - INFO -   total_samples: 5508125
+2025-10-18 21:47:17,706 - __main__ - INFO -   human_samples: 158078
+2025-10-18 21:47:17,706 - __main__ - INFO -   ai_samples: 5350047
+2025-10-18 21:47:17,706 - __main__ - INFO -   ai_models: ['llama-chat', 'mpt', 'mistral', 'mistral-chat', 'gpt2', 'mpt-chat', 'gpt3', 'cohere', 'chatgpt', 'gpt4', 'cohere-chat']
+2025-10-18 21:47:17,706 - __main__ - INFO -   domains: ['abstracts', 'books', 'news', 'poetry', 'recipes', 'reddit', 'reviews', 'wiki']
+2025-10-18 21:47:17,706 - __main__ - INFO -   text_length_stats: {'min': 12, 'max': 19368, 'mean': 1553.901754385965, 'median': 1440}
+2025-10-18 21:47:17,706 - __main__ - INFO - Loading data for model: gpt4
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO - Found parquet files in 12 categories
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_gpt3: 43 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_mpt-chat: 57 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_mistral-chat: 56 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_gpt4: 43 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_cohere: 43 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_cohere-chat: 43 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_llama-chat: 56 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_mpt: 57 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_mistral: 56 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_gpt2: 56 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   ai_chatgpt: 43 files
+2025-10-18 21:47:17,710 - src.training.data_loader - INFO -   real_human: 31 files
+2025-10-18 21:47:19,674 - src.training.data_loader - INFO - Loaded total 318557 rows from 43 files
+2025-10-18 21:47:19,681 - src.training.data_loader - INFO - Downsampled to 100 rows
+2025-10-18 21:47:20,560 - src.training.data_loader - INFO - Loaded total 158078 rows from 31 files
+2025-10-18 21:47:20,563 - src.training.data_loader - INFO - Downsampled to 100 rows
+2025-10-18 21:47:20,578 - src.training.data_loader - INFO - Combined dataset: 200 samples (100 human, 100 AI)
+2025-10-18 21:47:20,579 - src.training.data_loader - INFO - Split: Train=140, Val=20, Test=40
+2025-10-18 21:47:20,580 - src.training.data_loader - INFO - Train - Human: 70, AI: 70
+2025-10-18 21:47:20,580 - src.training.data_loader - INFO - Val   - Human: 10, AI: 10
+2025-10-18 21:47:20,580 - src.training.data_loader - INFO - Test  - Human: 20, AI: 20
+2025-10-18 21:47:20,580 - __main__ - INFO - 
+Dataset sizes:
+2025-10-18 21:47:20,580 - __main__ - INFO -   Train: 140
+2025-10-18 21:47:20,580 - __main__ - INFO -   Val:   20
+2025-10-18 21:47:20,580 - __main__ - INFO -   Test:  40
+2025-10-18 21:47:20,580 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:47:20,580 - __main__ - INFO - Initializing Model Trainer
+2025-10-18 21:47:20,580 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:22,696 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-18 21:47:22,696 - src.training.train - INFO - Total parameters: 54475779
+2025-10-18 21:47:22,696 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:47:22,696 - __main__ - INFO - Starting Training
+2025-10-18 21:47:22,696 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:22,696 - src.training.train - INFO - Starting model training...
+2025-10-18 21:47:28,335 - src.training.train - INFO - Epoch 1/1 - Train Loss: 0.3847, Train F1: 0.5347
+2025-10-18 21:47:28,618 - src.training.train - INFO - Validation - Loss: 0.6915, F1: 0.2857, AUC: 0.5700
+2025-10-18 21:47:29,305 - src.training.train - INFO - Checkpoint saved to test_outputs/integration_test/best_model_epoch_1.pt
+2025-10-18 21:47:29,306 - src.training.train - INFO - Training completed!
+2025-10-18 21:47:29,306 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:47:29,306 - __main__ - INFO - Saving Training Results
+2025-10-18 21:47:29,306 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:29,306 - __main__ - INFO - Results saved to test_outputs/integration_test/results.json
+2025-10-18 21:47:30,045 - src.training.train - INFO - Checkpoint saved to test_outputs/integration_test/final_model.pt
+2025-10-18 21:47:30,045 - __main__ - INFO - 
+================================================================================
+2025-10-18 21:47:30,045 - __main__ - INFO - Training Complete!
+2025-10-18 21:47:30,045 - __main__ - INFO - ================================================================================
+2025-10-18 21:47:30,045 - __main__ - INFO - Output directory: test_outputs/integration_test
+2025-10-18 21:47:30,045 - __main__ - INFO - Best validation loss: 0.6915
+2025-10-19 17:42:34,442 - __main__ - INFO - ================================================================================
+2025-10-19 17:42:34,442 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:42:34,442 - __main__ - INFO - ================================================================================
+2025-10-19 17:42:34,443 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:42:34,444 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:42:34,444 - __main__ - INFO - Training Configuration:
+2025-10-19 17:42:34,444 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:42:34,444 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:42:34,444 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:42:34,444 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:42:34,444 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:42:34,444 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:42:34,444 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:42:34,444 - __main__ - INFO -   per_device_train_batch_size: 8
+2025-10-19 17:42:34,444 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:42:34,444 - __main__ - INFO -   num_train_epochs: 1
+2025-10-19 17:42:34,444 - __main__ - INFO -   max_steps: None
+2025-10-19 17:42:34,444 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:42:34,444 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:42:34,444 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:42:34,444 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:42:34,444 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:42:34,444 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:42:34,444 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:42:34,444 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:42:34,444 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:42:34,444 - __main__ - INFO -   fp16: False
+2025-10-19 17:42:34,444 - __main__ - INFO -   bf16: True
+2025-10-19 17:42:34,444 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:42:34,444 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:42:34,444 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:42:34,444 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:42:34,444 - __main__ - INFO -   use_ema: True
+2025-10-19 17:42:34,444 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:42:34,444 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:42:34,444 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:42:34,444 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:42:34,444 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:42:34,444 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:42:34,444 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:42:34,444 - __main__ - INFO -   device: cuda
+2025-10-19 17:42:34,444 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:42:34,444 - __main__ - INFO - Loading Data
+2025-10-19 17:42:34,444 - __main__ - INFO - ================================================================================
+2025-10-19 17:42:34,444 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:42:34,444 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:42:34,444 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:42:34,444 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:42:34,444 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:42:34,445 - __main__ - INFO -   domains: []
+2025-10-19 17:42:34,445 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:42:34,445 - __main__ - INFO - Loading data for model: gpt4
+2025-10-19 17:42:34,445 - src.training.data_loader - INFO - Found parquet files in 0 categories
+2025-10-19 17:43:41,175 - __main__ - INFO - ================================================================================
+2025-10-19 17:43:41,175 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:43:41,175 - __main__ - INFO - ================================================================================
+2025-10-19 17:43:41,176 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:43:41,176 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:43:41,176 - __main__ - INFO - Training Configuration:
+2025-10-19 17:43:41,176 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:43:41,176 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:43:41,176 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:43:41,176 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:43:41,176 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:43:41,176 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:43:41,176 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:43:41,176 - __main__ - INFO -   per_device_train_batch_size: 8
+2025-10-19 17:43:41,176 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:43:41,176 - __main__ - INFO -   num_train_epochs: 1
+2025-10-19 17:43:41,176 - __main__ - INFO -   max_steps: None
+2025-10-19 17:43:41,176 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:43:41,176 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:43:41,176 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:43:41,176 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:43:41,176 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:43:41,176 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:43:41,176 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:43:41,176 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:43:41,176 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:43:41,176 - __main__ - INFO -   fp16: False
+2025-10-19 17:43:41,176 - __main__ - INFO -   bf16: True
+2025-10-19 17:43:41,176 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:43:41,176 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:43:41,176 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:43:41,176 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:43:41,177 - __main__ - INFO -   use_ema: True
+2025-10-19 17:43:41,177 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:43:41,177 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:43:41,177 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:43:41,177 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:43:41,177 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:43:41,177 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:43:41,177 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:43:41,177 - __main__ - INFO -   device: cuda
+2025-10-19 17:43:41,177 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:43:41,177 - __main__ - INFO - Loading Data
+2025-10-19 17:43:41,177 - __main__ - INFO - ================================================================================
+2025-10-19 17:43:41,177 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:43:41,177 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:43:41,177 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:43:41,177 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:43:41,177 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:43:41,177 - __main__ - INFO -   domains: []
+2025-10-19 17:43:41,177 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:43:41,177 - __main__ - INFO - Loading data for model: gpt4
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:43:41,180 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:44:34,258 - __main__ - INFO - ================================================================================
+2025-10-19 17:44:34,258 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:44:34,258 - __main__ - INFO - ================================================================================
+2025-10-19 17:44:34,259 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:44:34,259 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:44:34,259 - __main__ - INFO - Training Configuration:
+2025-10-19 17:44:34,259 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:44:34,259 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:44:34,259 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:44:34,259 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:44:34,259 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:44:34,259 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:44:34,259 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:44:34,259 - __main__ - INFO -   per_device_train_batch_size: 8
+2025-10-19 17:44:34,259 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:44:34,259 - __main__ - INFO -   num_train_epochs: 1
+2025-10-19 17:44:34,259 - __main__ - INFO -   max_steps: None
+2025-10-19 17:44:34,259 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:44:34,259 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:44:34,259 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:44:34,259 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:44:34,259 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:44:34,259 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:44:34,259 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:44:34,259 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:44:34,259 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:44:34,259 - __main__ - INFO -   fp16: False
+2025-10-19 17:44:34,259 - __main__ - INFO -   bf16: True
+2025-10-19 17:44:34,259 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:44:34,259 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:44:34,259 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:44:34,259 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:44:34,259 - __main__ - INFO -   use_ema: True
+2025-10-19 17:44:34,259 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:44:34,259 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:44:34,259 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:44:34,259 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:44:34,259 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:44:34,259 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:44:34,259 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:44:34,259 - __main__ - INFO -   device: cuda
+2025-10-19 17:44:34,259 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:44:34,259 - __main__ - INFO - Loading Data
+2025-10-19 17:44:34,259 - __main__ - INFO - ================================================================================
+2025-10-19 17:44:34,260 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:44:34,260 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:44:34,260 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:44:34,260 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:44:34,260 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:44:34,260 - __main__ - INFO -   domains: []
+2025-10-19 17:44:34,260 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:44:34,260 - __main__ - INFO - Loading data for model: gpt4
+2025-10-19 17:44:34,262 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:44:34,262 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:44:34,262 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:44:34,262 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:44:34,262 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO - Loading 43 AI files for model 'gpt4'
+2025-10-19 17:44:34,263 - src.training.data_loader - INFO - Loading 20 human files
+2025-10-19 17:44:36,251 - src.training.data_loader - INFO - Loaded total 318557 rows from 43 files
+2025-10-19 17:44:36,259 - src.training.data_loader - INFO - Downsampled to 50 rows
+2025-10-19 17:44:45,363 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:44:45,386 - src.training.data_loader - INFO - Downsampled to 50 rows
+2025-10-19 17:44:45,476 - src.training.data_loader - INFO - Combined dataset: 100 samples (50 human, 50 AI)
+2025-10-19 17:44:45,478 - src.training.data_loader - INFO - Split: Train=70, Val=10, Test=20
+2025-10-19 17:44:45,478 - src.training.data_loader - INFO - Train - Human: 35, AI: 35
+2025-10-19 17:44:45,479 - src.training.data_loader - INFO - Val   - Human: 5, AI: 5
+2025-10-19 17:44:45,479 - src.training.data_loader - INFO - Test  - Human: 10, AI: 10
+2025-10-19 17:44:45,479 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:44:45,479 - __main__ - INFO -   Train: 70
+2025-10-19 17:44:45,479 - __main__ - INFO -   Val:   10
+2025-10-19 17:44:45,479 - __main__ - INFO -   Test:  20
+2025-10-19 17:44:45,479 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:44:45,479 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:44:45,480 - __main__ - INFO - ================================================================================
+2025-10-19 17:44:47,668 - src.training.train - INFO - CheckpointManager initialized at test_output/checkpoints
+2025-10-19 17:44:47,668 - src.training.train - INFO - Using safetensors format
+2025-10-19 17:44:47,668 - src.training.train - INFO - ModelSaver initialized at test_output/models
+2025-10-19 17:44:47,668 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 17:44:47,668 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 17:44:47,669 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 17:44:47,669 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:44:47,669 - __main__ - INFO - Starting Training
+2025-10-19 17:44:47,669 - __main__ - INFO - ================================================================================
+2025-10-19 17:44:47,669 - src.training.train - INFO - Starting model training...
+2025-10-19 17:45:02,590 - __main__ - INFO - ================================================================================
+2025-10-19 17:45:02,590 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:45:02,590 - __main__ - INFO - ================================================================================
+2025-10-19 17:45:02,591 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:45:02,591 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:45:02,591 - __main__ - INFO - Training Configuration:
+2025-10-19 17:45:02,591 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:45:02,591 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:45:02,591 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:45:02,591 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:45:02,591 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:45:02,591 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:45:02,591 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:45:02,591 - __main__ - INFO -   per_device_train_batch_size: 8
+2025-10-19 17:45:02,591 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:45:02,591 - __main__ - INFO -   num_train_epochs: 1
+2025-10-19 17:45:02,591 - __main__ - INFO -   max_steps: None
+2025-10-19 17:45:02,591 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:45:02,591 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:45:02,591 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:45:02,591 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:45:02,591 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:45:02,591 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:45:02,591 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:45:02,591 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:45:02,591 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:45:02,591 - __main__ - INFO -   fp16: False
+2025-10-19 17:45:02,591 - __main__ - INFO -   bf16: True
+2025-10-19 17:45:02,591 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:45:02,592 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:45:02,592 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:45:02,592 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:45:02,592 - __main__ - INFO -   use_ema: True
+2025-10-19 17:45:02,592 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:45:02,592 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:45:02,592 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:45:02,592 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:45:02,592 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:45:02,592 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:45:02,592 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:45:02,592 - __main__ - INFO -   device: cuda
+2025-10-19 17:45:02,592 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:45:02,592 - __main__ - INFO - Loading Data
+2025-10-19 17:45:02,592 - __main__ - INFO - ================================================================================
+2025-10-19 17:45:02,592 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:45:02,592 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:45:02,592 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:45:02,592 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:45:02,592 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:45:02,592 - __main__ - INFO -   domains: []
+2025-10-19 17:45:02,592 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:45:02,592 - __main__ - INFO - Loading data for model: gpt4
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO - Loading 43 AI files for model 'gpt4'
+2025-10-19 17:45:02,595 - src.training.data_loader - INFO - Loading 20 human files
+2025-10-19 17:45:04,523 - src.training.data_loader - INFO - Loaded total 318557 rows from 43 files
+2025-10-19 17:45:04,530 - src.training.data_loader - INFO - Downsampled to 50 rows
+2025-10-19 17:45:13,673 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:45:13,695 - src.training.data_loader - INFO - Downsampled to 50 rows
+2025-10-19 17:45:13,785 - src.training.data_loader - INFO - Combined dataset: 100 samples (50 human, 50 AI)
+2025-10-19 17:45:13,787 - src.training.data_loader - INFO - Split: Train=70, Val=10, Test=20
+2025-10-19 17:45:13,787 - src.training.data_loader - INFO - Train - Human: 35, AI: 35
+2025-10-19 17:45:13,787 - src.training.data_loader - INFO - Val   - Human: 5, AI: 5
+2025-10-19 17:45:13,787 - src.training.data_loader - INFO - Test  - Human: 10, AI: 10
+2025-10-19 17:45:13,787 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:45:13,787 - __main__ - INFO -   Train: 70
+2025-10-19 17:45:13,787 - __main__ - INFO -   Val:   10
+2025-10-19 17:45:13,787 - __main__ - INFO -   Test:  20
+2025-10-19 17:45:13,788 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:45:13,788 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:45:13,788 - __main__ - INFO - ================================================================================
+2025-10-19 17:49:56,715 - __main__ - INFO - ================================================================================
+2025-10-19 17:49:56,715 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:49:56,715 - __main__ - INFO - ================================================================================
+2025-10-19 17:49:56,716 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:49:56,716 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:49:56,716 - __main__ - INFO - Training Configuration:
+2025-10-19 17:49:56,716 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:49:56,716 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:49:56,716 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:49:56,716 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:49:56,716 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:49:56,716 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:49:56,716 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:49:56,716 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 17:49:56,716 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:49:56,716 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 17:49:56,716 - __main__ - INFO -   max_steps: None
+2025-10-19 17:49:56,716 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:49:56,716 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:49:56,716 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:49:56,716 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:49:56,716 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:49:56,716 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:49:56,716 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:49:56,716 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:49:56,716 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:49:56,716 - __main__ - INFO -   fp16: False
+2025-10-19 17:49:56,716 - __main__ - INFO -   bf16: True
+2025-10-19 17:49:56,716 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:49:56,716 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:49:56,716 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:49:56,716 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:49:56,716 - __main__ - INFO -   use_ema: True
+2025-10-19 17:49:56,716 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:49:56,716 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:49:56,716 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:49:56,716 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:49:56,716 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:49:56,716 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:49:56,716 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:49:56,716 - __main__ - INFO -   device: cuda
+2025-10-19 17:49:56,716 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:49:56,716 - __main__ - INFO - Loading Data
+2025-10-19 17:49:56,716 - __main__ - INFO - ================================================================================
+2025-10-19 17:49:56,716 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:49:56,716 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:49:56,716 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:49:56,716 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:49:56,716 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:49:56,716 - __main__ - INFO -   domains: []
+2025-10-19 17:49:56,716 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:49:56,716 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 17:49:56,719 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:49:56,719 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:49:56,719 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:49:56,720 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:49:59,998 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 17:50:08,631 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:50:09,489 - src.training.data_loader - INFO - Combined dataset: 1872505 samples (999586 human, 872919 AI)
+2025-10-19 17:50:10,457 - src.training.data_loader - INFO - Split: Train=1310753, Val=187251, Test=374501
+2025-10-19 17:50:10,459 - src.training.data_loader - INFO - Train - Human: 699710, AI: 611043
+2025-10-19 17:50:10,459 - src.training.data_loader - INFO - Val   - Human: 99959, AI: 87292
+2025-10-19 17:50:10,459 - src.training.data_loader - INFO - Test  - Human: 199917, AI: 174584
+2025-10-19 17:50:10,567 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:50:10,567 - __main__ - INFO -   Train: 1310753
+2025-10-19 17:50:10,567 - __main__ - INFO -   Val:   187251
+2025-10-19 17:50:10,567 - __main__ - INFO -   Test:  374501
+2025-10-19 17:50:10,569 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:50:10,569 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:50:10,569 - __main__ - INFO - ================================================================================
+2025-10-19 17:50:12,417 - src.training.train - INFO - CheckpointManager initialized at outputs/full_dataset_model/checkpoints
+2025-10-19 17:50:12,417 - src.training.train - INFO - Using safetensors format
+2025-10-19 17:50:12,417 - src.training.train - INFO - ModelSaver initialized at outputs/full_dataset_model/models
+2025-10-19 17:50:12,417 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 17:50:12,418 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 17:50:12,418 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 17:50:12,418 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:50:12,418 - __main__ - INFO - Starting Training
+2025-10-19 17:50:12,418 - __main__ - INFO - ================================================================================
+2025-10-19 17:50:12,418 - src.training.train - INFO - Starting model training...
+2025-10-19 17:53:17,675 - __main__ - INFO - ================================================================================
+2025-10-19 17:53:17,675 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:53:17,675 - __main__ - INFO - ================================================================================
+2025-10-19 17:53:17,675 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:53:17,675 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:53:17,675 - __main__ - INFO - Training Configuration:
+2025-10-19 17:53:17,676 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:53:17,676 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:53:17,676 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:53:17,676 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:53:17,676 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:53:17,676 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:53:17,676 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:53:17,676 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 17:53:17,676 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:53:17,676 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 17:53:17,676 - __main__ - INFO -   max_steps: None
+2025-10-19 17:53:17,676 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:53:17,676 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:53:17,676 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:53:17,676 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:53:17,676 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:53:17,676 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:53:17,676 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:53:17,676 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:53:17,676 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:53:17,676 - __main__ - INFO -   fp16: False
+2025-10-19 17:53:17,676 - __main__ - INFO -   bf16: True
+2025-10-19 17:53:17,676 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:53:17,676 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:53:17,676 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:53:17,676 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:53:17,676 - __main__ - INFO -   use_ema: True
+2025-10-19 17:53:17,676 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:53:17,676 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:53:17,676 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:53:17,676 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:53:17,676 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:53:17,676 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:53:17,676 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:53:17,676 - __main__ - INFO -   device: cuda
+2025-10-19 17:53:17,676 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:53:17,676 - __main__ - INFO - Loading Data
+2025-10-19 17:53:17,676 - __main__ - INFO - ================================================================================
+2025-10-19 17:53:17,676 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:53:17,676 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:53:17,676 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:53:17,676 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:53:17,676 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:53:17,676 - __main__ - INFO -   domains: []
+2025-10-19 17:53:17,676 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:53:17,676 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:53:17,679 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:53:20,853 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 17:53:20,949 - src.training.data_loader - INFO - Downsampled to 500000 rows
+2025-10-19 17:53:29,279 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:53:29,357 - src.training.data_loader - INFO - Downsampled to 500000 rows
+2025-10-19 17:53:29,797 - src.training.data_loader - INFO - Combined dataset: 1000000 samples (500000 human, 500000 AI)
+2025-10-19 17:53:30,238 - src.training.data_loader - INFO - Split: Train=700000, Val=100000, Test=200000
+2025-10-19 17:53:30,239 - src.training.data_loader - INFO - Train - Human: 350000, AI: 350000
+2025-10-19 17:53:30,239 - src.training.data_loader - INFO - Val   - Human: 50000, AI: 50000
+2025-10-19 17:53:30,239 - src.training.data_loader - INFO - Test  - Human: 100000, AI: 100000
+2025-10-19 17:53:30,300 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:53:30,300 - __main__ - INFO -   Train: 700000
+2025-10-19 17:53:30,300 - __main__ - INFO -   Val:   100000
+2025-10-19 17:53:30,300 - __main__ - INFO -   Test:  200000
+2025-10-19 17:53:30,302 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:53:30,302 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:53:30,302 - __main__ - INFO - ================================================================================
+2025-10-19 17:53:31,953 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_1M/checkpoints
+2025-10-19 17:53:31,953 - src.training.train - INFO - Using safetensors format
+2025-10-19 17:53:31,953 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_1M/models
+2025-10-19 17:53:31,953 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 17:53:31,954 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 17:53:31,954 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 17:53:31,954 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:53:31,954 - __main__ - INFO - Starting Training
+2025-10-19 17:53:31,954 - __main__ - INFO - ================================================================================
+2025-10-19 17:53:31,954 - src.training.train - INFO - Starting model training...
+2025-10-19 17:55:54,819 - __main__ - INFO - ================================================================================
+2025-10-19 17:55:54,819 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:55:54,819 - __main__ - INFO - ================================================================================
+2025-10-19 17:55:54,819 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:55:54,820 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:55:54,820 - __main__ - INFO - Training Configuration:
+2025-10-19 17:55:54,820 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:55:54,820 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:55:54,820 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:55:54,820 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:55:54,820 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:55:54,820 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:55:54,820 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:55:54,820 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 17:55:54,820 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:55:54,820 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 17:55:54,820 - __main__ - INFO -   max_steps: None
+2025-10-19 17:55:54,820 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:55:54,820 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:55:54,820 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:55:54,820 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:55:54,820 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:55:54,820 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:55:54,820 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:55:54,820 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:55:54,820 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:55:54,820 - __main__ - INFO -   fp16: False
+2025-10-19 17:55:54,820 - __main__ - INFO -   bf16: True
+2025-10-19 17:55:54,820 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:55:54,820 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:55:54,820 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:55:54,820 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:55:54,820 - __main__ - INFO -   use_ema: True
+2025-10-19 17:55:54,820 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:55:54,820 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:55:54,820 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:55:54,820 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:55:54,820 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:55:54,820 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:55:54,820 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:55:54,820 - __main__ - INFO -   device: cuda
+2025-10-19 17:55:54,820 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:55:54,820 - __main__ - INFO - Loading Data
+2025-10-19 17:55:54,820 - __main__ - INFO - ================================================================================
+2025-10-19 17:55:54,820 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:55:54,820 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:55:54,820 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:55:54,820 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:55:54,820 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:55:54,820 - __main__ - INFO -   domains: []
+2025-10-19 17:55:54,820 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:55:54,821 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:55:54,824 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:55:58,000 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 17:55:58,043 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 17:56:06,562 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:56:06,599 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 17:56:06,746 - src.training.data_loader - INFO - Combined dataset: 200000 samples (100000 human, 100000 AI)
+2025-10-19 17:56:06,831 - src.training.data_loader - INFO - Split: Train=140000, Val=20000, Test=40000
+2025-10-19 17:56:06,831 - src.training.data_loader - INFO - Train - Human: 70000, AI: 70000
+2025-10-19 17:56:06,832 - src.training.data_loader - INFO - Val   - Human: 10000, AI: 10000
+2025-10-19 17:56:06,832 - src.training.data_loader - INFO - Test  - Human: 20000, AI: 20000
+2025-10-19 17:56:06,843 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:56:06,843 - __main__ - INFO -   Train: 140000
+2025-10-19 17:56:06,843 - __main__ - INFO -   Val:   20000
+2025-10-19 17:56:06,843 - __main__ - INFO -   Test:  40000
+2025-10-19 17:56:06,844 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:56:06,844 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:56:06,844 - __main__ - INFO - ================================================================================
+2025-10-19 17:56:08,560 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_200k/checkpoints
+2025-10-19 17:56:08,560 - src.training.train - INFO - Using safetensors format
+2025-10-19 17:56:08,560 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_200k/models
+2025-10-19 17:56:08,560 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 17:56:08,561 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 17:56:08,561 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 17:56:08,561 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:56:08,561 - __main__ - INFO - Starting Training
+2025-10-19 17:56:08,561 - __main__ - INFO - ================================================================================
+2025-10-19 17:56:08,561 - src.training.train - INFO - Starting model training...
+2025-10-19 17:57:10,518 - __main__ - INFO - ================================================================================
+2025-10-19 17:57:10,518 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 17:57:10,518 - __main__ - INFO - ================================================================================
+2025-10-19 17:57:10,519 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 17:57:10,519 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 17:57:10,519 - __main__ - INFO - Training Configuration:
+2025-10-19 17:57:10,519 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 17:57:10,519 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 17:57:10,519 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 17:57:10,519 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 17:57:10,519 - __main__ - INFO -   attention_pooling: True
+2025-10-19 17:57:10,519 - __main__ - INFO -   dropout: 0.4
+2025-10-19 17:57:10,519 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 17:57:10,519 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 17:57:10,519 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 17:57:10,519 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 17:57:10,519 - __main__ - INFO -   max_steps: None
+2025-10-19 17:57:10,519 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 17:57:10,519 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 17:57:10,519 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 17:57:10,519 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 17:57:10,519 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 17:57:10,519 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 17:57:10,519 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 17:57:10,519 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 17:57:10,519 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 17:57:10,519 - __main__ - INFO -   fp16: False
+2025-10-19 17:57:10,519 - __main__ - INFO -   bf16: True
+2025-10-19 17:57:10,519 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 17:57:10,519 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 17:57:10,519 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 17:57:10,519 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 17:57:10,519 - __main__ - INFO -   use_ema: True
+2025-10-19 17:57:10,519 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 17:57:10,519 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 17:57:10,519 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 17:57:10,519 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 17:57:10,519 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 17:57:10,519 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 17:57:10,519 - __main__ - INFO -   logging_steps: 100
+2025-10-19 17:57:10,519 - __main__ - INFO -   device: cuda
+2025-10-19 17:57:10,519 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:57:10,519 - __main__ - INFO - Loading Data
+2025-10-19 17:57:10,519 - __main__ - INFO - ================================================================================
+2025-10-19 17:57:10,520 - __main__ - INFO - Processed Data Summary:
+2025-10-19 17:57:10,520 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 17:57:10,520 - __main__ - INFO -   human_samples: 817018
+2025-10-19 17:57:10,520 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 17:57:10,520 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 17:57:10,520 - __main__ - INFO -   domains: []
+2025-10-19 17:57:10,520 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 17:57:10,520 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 17:57:10,522 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 17:57:10,523 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 17:57:14,058 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 17:57:14,111 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 17:57:23,770 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 17:57:23,805 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 17:57:23,959 - src.training.data_loader - INFO - Combined dataset: 200000 samples (100000 human, 100000 AI)
+2025-10-19 17:57:24,047 - src.training.data_loader - INFO - Split: Train=140000, Val=20000, Test=40000
+2025-10-19 17:57:24,048 - src.training.data_loader - INFO - Train - Human: 70000, AI: 70000
+2025-10-19 17:57:24,048 - src.training.data_loader - INFO - Val   - Human: 10000, AI: 10000
+2025-10-19 17:57:24,048 - src.training.data_loader - INFO - Test  - Human: 20000, AI: 20000
+2025-10-19 17:57:24,060 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 17:57:24,060 - __main__ - INFO -   Train: 140000
+2025-10-19 17:57:24,060 - __main__ - INFO -   Val:   20000
+2025-10-19 17:57:24,060 - __main__ - INFO -   Test:  40000
+2025-10-19 17:57:24,061 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:57:24,061 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 17:57:24,061 - __main__ - INFO - ================================================================================
+2025-10-19 17:57:25,860 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_200k/checkpoints
+2025-10-19 17:57:25,860 - src.training.train - INFO - Using safetensors format
+2025-10-19 17:57:25,860 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_200k/models
+2025-10-19 17:57:25,860 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 17:57:25,860 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 17:57:25,861 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 17:57:25,861 - __main__ - INFO - 
+================================================================================
+2025-10-19 17:57:25,861 - __main__ - INFO - Starting Training
+2025-10-19 17:57:25,861 - __main__ - INFO - ================================================================================
+2025-10-19 17:57:25,861 - src.training.train - INFO - Starting model training...
+2025-10-19 18:01:41,643 - src.training.train - INFO - Step 100, Loss: 0.0517
+2025-10-19 18:01:53,541 - __main__ - INFO - ================================================================================
+2025-10-19 18:01:53,541 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 18:01:53,541 - __main__ - INFO - ================================================================================
+2025-10-19 18:01:53,541 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 18:01:53,541 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 18:01:53,541 - __main__ - INFO - Training Configuration:
+2025-10-19 18:01:53,542 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 18:01:53,542 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 18:01:53,542 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 18:01:53,542 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 18:01:53,542 - __main__ - INFO -   attention_pooling: True
+2025-10-19 18:01:53,542 - __main__ - INFO -   dropout: 0.4
+2025-10-19 18:01:53,542 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 18:01:53,542 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 18:01:53,542 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 18:01:53,542 - __main__ - INFO -   num_train_epochs: 3
+2025-10-19 18:01:53,542 - __main__ - INFO -   max_steps: None
+2025-10-19 18:01:53,542 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 18:01:53,542 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 18:01:53,542 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 18:01:53,542 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 18:01:53,542 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 18:01:53,542 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 18:01:53,542 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 18:01:53,542 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 18:01:53,542 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 18:01:53,542 - __main__ - INFO -   fp16: False
+2025-10-19 18:01:53,542 - __main__ - INFO -   bf16: True
+2025-10-19 18:01:53,542 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 18:01:53,542 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 18:01:53,542 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 18:01:53,542 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 18:01:53,542 - __main__ - INFO -   use_ema: True
+2025-10-19 18:01:53,542 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 18:01:53,542 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 18:01:53,542 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 18:01:53,542 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 18:01:53,542 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 18:01:53,542 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 18:01:53,542 - __main__ - INFO -   logging_steps: 100
+2025-10-19 18:01:53,542 - __main__ - INFO -   device: cuda
+2025-10-19 18:01:53,542 - __main__ - INFO - 
+================================================================================
+2025-10-19 18:01:53,542 - __main__ - INFO - Loading Data
+2025-10-19 18:01:53,542 - __main__ - INFO - ================================================================================
+2025-10-19 18:01:53,542 - __main__ - INFO - Processed Data Summary:
+2025-10-19 18:01:53,542 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 18:01:53,542 - __main__ - INFO -   human_samples: 817018
+2025-10-19 18:01:53,542 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 18:01:53,542 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 18:01:53,543 - __main__ - INFO -   domains: []
+2025-10-19 18:01:53,543 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 18:01:53,543 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 18:01:53,547 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 18:01:57,238 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 18:01:57,270 - src.training.data_loader - INFO - Downsampled to 50000 rows
+2025-10-19 18:02:05,946 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 18:02:05,976 - src.training.data_loader - INFO - Downsampled to 50000 rows
+2025-10-19 18:02:06,089 - src.training.data_loader - INFO - Combined dataset: 100000 samples (50000 human, 50000 AI)
+2025-10-19 18:02:06,136 - src.training.data_loader - INFO - Split: Train=70000, Val=10000, Test=20000
+2025-10-19 18:02:06,136 - src.training.data_loader - INFO - Train - Human: 35000, AI: 35000
+2025-10-19 18:02:06,137 - src.training.data_loader - INFO - Val   - Human: 5000, AI: 5000
+2025-10-19 18:02:06,137 - src.training.data_loader - INFO - Test  - Human: 10000, AI: 10000
+2025-10-19 18:02:06,143 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 18:02:06,143 - __main__ - INFO -   Train: 70000
+2025-10-19 18:02:06,143 - __main__ - INFO -   Val:   10000
+2025-10-19 18:02:06,143 - __main__ - INFO -   Test:  20000
+2025-10-19 18:02:06,144 - __main__ - INFO - 
+================================================================================
+2025-10-19 18:02:06,144 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 18:02:06,144 - __main__ - INFO - ================================================================================
+2025-10-19 18:02:08,007 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_100k/checkpoints
+2025-10-19 18:02:08,007 - src.training.train - INFO - Using safetensors format
+2025-10-19 18:02:08,008 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_100k/models
+2025-10-19 18:02:08,008 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 18:02:08,008 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 18:02:08,008 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 18:02:08,008 - __main__ - INFO - 
+================================================================================
+2025-10-19 18:02:08,008 - __main__ - INFO - Starting Training
+2025-10-19 18:02:08,008 - __main__ - INFO - ================================================================================
+2025-10-19 18:02:08,008 - src.training.train - INFO - Starting model training...
+2025-10-19 18:09:43,395 - src.training.train - INFO - Step 200, Loss: 0.0514
+2025-10-19 18:11:08,865 - src.training.train - INFO - Step 100, Loss: 0.0515
+2025-10-19 18:18:45,436 - src.training.train - INFO - Step 300, Loss: 0.0832
+2025-10-19 18:20:06,990 - src.training.train - INFO - Step 200, Loss: 0.0730
+2025-10-19 18:28:03,909 - src.training.train - INFO - Step 400, Loss: 0.0521
+2025-10-19 18:29:35,334 - src.training.train - INFO - Step 300, Loss: 0.0499
+2025-10-19 18:38:44,904 - src.training.train - INFO - Step 500, Loss: 0.0504
+2025-10-19 18:40:12,107 - src.training.train - INFO - Step 400, Loss: 0.0499
+2025-10-19 18:49:57,556 - src.training.train - INFO - Step 600, Loss: 0.0498
+2025-10-19 18:51:36,324 - src.training.train - INFO - Step 500, Loss: 0.0498
+2025-10-19 19:01:08,978 - src.training.train - INFO - Step 700, Loss: 0.0504
+2025-10-19 19:02:43,021 - src.training.train - INFO - Step 600, Loss: 0.2072
+2025-10-19 19:08:14,579 - src.training.train - INFO - Step 800, Loss: 0.0499
+2025-10-19 19:08:51,765 - src.training.train - INFO - Step 700, Loss: 0.0509
+2025-10-19 19:13:20,182 - src.training.train - INFO - Step 900, Loss: 0.0497
+2025-10-19 19:14:13,169 - src.training.train - INFO - Step 800, Loss: 0.0498
+2025-10-19 19:19:04,447 - src.training.train - INFO - Step 1000, Loss: 0.0497
+2025-10-19 19:19:49,917 - src.training.train - INFO - Step 900, Loss: 0.0500
+2025-10-19 19:24:36,991 - src.training.train - INFO - Step 1100, Loss: 0.0512
+2025-10-19 19:25:26,484 - src.training.train - INFO - Step 1000, Loss: 0.0497
+2025-10-19 19:32:11,957 - src.training.train - INFO - Step 1200, Loss: 0.0497
+2025-10-19 19:32:32,869 - src.training.train - INFO - Epoch 1/3 - Train Loss: 0.0625, Train F1: 0.9736
+2025-10-19 19:36:00,474 - src.training.train - INFO - Step 1300, Loss: 0.0497
+2025-10-19 19:38:50,993 - src.training.train - INFO - Step 1400, Loss: 0.0496
+2025-10-19 19:41:42,219 - src.training.train - INFO - Step 1500, Loss: 0.0497
+2025-10-19 19:44:33,157 - src.training.train - INFO - Step 1600, Loss: 0.0497
+2025-10-19 19:56:44,703 - __main__ - INFO - ================================================================================
+2025-10-19 19:56:44,703 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 19:56:44,703 - __main__ - INFO - ================================================================================
+2025-10-19 19:56:44,704 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 19:56:44,704 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 19:56:44,704 - __main__ - INFO - Training Configuration:
+2025-10-19 19:56:44,704 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 19:56:44,704 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 19:56:44,704 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 19:56:44,704 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 19:56:44,704 - __main__ - INFO -   attention_pooling: True
+2025-10-19 19:56:44,704 - __main__ - INFO -   dropout: 0.4
+2025-10-19 19:56:44,704 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 19:56:44,704 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 19:56:44,704 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 19:56:44,704 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 19:56:44,704 - __main__ - INFO -   max_steps: None
+2025-10-19 19:56:44,704 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 19:56:44,704 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 19:56:44,704 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 19:56:44,704 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 19:56:44,704 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 19:56:44,704 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 19:56:44,704 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 19:56:44,704 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 19:56:44,704 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 19:56:44,705 - __main__ - INFO -   fp16: False
+2025-10-19 19:56:44,705 - __main__ - INFO -   bf16: True
+2025-10-19 19:56:44,705 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 19:56:44,705 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 19:56:44,705 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 19:56:44,705 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 19:56:44,705 - __main__ - INFO -   use_ema: True
+2025-10-19 19:56:44,705 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 19:56:44,705 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 19:56:44,705 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 19:56:44,705 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 19:56:44,705 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 19:56:44,705 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 19:56:44,705 - __main__ - INFO -   logging_steps: 100
+2025-10-19 19:56:44,705 - __main__ - INFO -   device: cuda
+2025-10-19 19:56:44,705 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:56:44,705 - __main__ - INFO - Loading Data
+2025-10-19 19:56:44,705 - __main__ - INFO - ================================================================================
+2025-10-19 19:56:44,706 - __main__ - INFO - Processed Data Summary:
+2025-10-19 19:56:44,706 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 19:56:44,706 - __main__ - INFO -   human_samples: 817018
+2025-10-19 19:56:44,706 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 19:56:44,706 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 19:56:44,706 - __main__ - INFO -   domains: []
+2025-10-19 19:56:44,706 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 19:56:44,706 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 19:56:44,709 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 19:56:48,179 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 19:56:57,302 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 19:56:58,057 - src.training.data_loader - INFO - Combined dataset: 1872505 samples (999586 human, 872919 AI)
+2025-10-19 19:56:58,943 - src.training.data_loader - INFO - Split: Train=1310753, Val=187251, Test=374501
+2025-10-19 19:56:58,945 - src.training.data_loader - INFO - Train - Human: 699710, AI: 611043
+2025-10-19 19:56:58,945 - src.training.data_loader - INFO - Val   - Human: 99959, AI: 87292
+2025-10-19 19:56:58,945 - src.training.data_loader - INFO - Test  - Human: 199917, AI: 174584
+2025-10-19 19:56:59,047 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 19:56:59,047 - __main__ - INFO -   Train: 1310753
+2025-10-19 19:56:59,047 - __main__ - INFO -   Val:   187251
+2025-10-19 19:56:59,047 - __main__ - INFO -   Test:  374501
+2025-10-19 19:56:59,050 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:56:59,050 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 19:56:59,050 - __main__ - INFO - ================================================================================
+2025-10-19 19:57:01,939 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_4.4M/checkpoints
+2025-10-19 19:57:01,939 - src.training.train - INFO - Using safetensors format
+2025-10-19 19:57:01,939 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_4.4M/models
+2025-10-19 19:57:01,940 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 19:57:01,940 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 19:57:01,940 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 19:57:01,940 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:57:01,940 - __main__ - INFO - Starting Training
+2025-10-19 19:57:01,940 - __main__ - INFO - ================================================================================
+2025-10-19 19:57:01,940 - src.training.train - INFO - Starting model training...
+2025-10-19 19:59:22,692 - __main__ - INFO - ================================================================================
+2025-10-19 19:59:22,692 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 19:59:22,692 - __main__ - INFO - ================================================================================
+2025-10-19 19:59:22,692 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 19:59:22,692 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 19:59:22,692 - __main__ - INFO - Training Configuration:
+2025-10-19 19:59:22,693 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 19:59:22,693 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 19:59:22,693 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 19:59:22,693 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 19:59:22,693 - __main__ - INFO -   attention_pooling: True
+2025-10-19 19:59:22,693 - __main__ - INFO -   dropout: 0.4
+2025-10-19 19:59:22,693 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 19:59:22,693 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 19:59:22,693 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 19:59:22,693 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 19:59:22,693 - __main__ - INFO -   max_steps: None
+2025-10-19 19:59:22,693 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 19:59:22,693 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 19:59:22,693 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 19:59:22,693 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 19:59:22,693 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 19:59:22,693 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 19:59:22,693 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 19:59:22,693 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 19:59:22,693 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 19:59:22,693 - __main__ - INFO -   fp16: False
+2025-10-19 19:59:22,693 - __main__ - INFO -   bf16: True
+2025-10-19 19:59:22,693 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 19:59:22,693 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 19:59:22,693 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 19:59:22,693 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 19:59:22,693 - __main__ - INFO -   use_ema: True
+2025-10-19 19:59:22,693 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 19:59:22,693 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 19:59:22,693 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 19:59:22,693 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 19:59:22,693 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 19:59:22,693 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 19:59:22,693 - __main__ - INFO -   logging_steps: 100
+2025-10-19 19:59:22,693 - __main__ - INFO -   device: cuda
+2025-10-19 19:59:22,693 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:59:22,693 - __main__ - INFO - Loading Data
+2025-10-19 19:59:22,693 - __main__ - INFO - ================================================================================
+2025-10-19 19:59:22,693 - __main__ - INFO - Processed Data Summary:
+2025-10-19 19:59:22,693 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 19:59:22,693 - __main__ - INFO -   human_samples: 817018
+2025-10-19 19:59:22,693 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 19:59:22,693 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 19:59:22,693 - __main__ - INFO -   domains: []
+2025-10-19 19:59:22,693 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 19:59:22,693 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 19:59:22,696 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 19:59:22,697 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 19:59:22,697 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 19:59:22,697 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 19:59:22,697 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 19:59:25,861 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 19:59:25,898 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 19:59:34,304 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 19:59:34,336 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 19:59:34,476 - src.training.data_loader - INFO - Combined dataset: 200000 samples (100000 human, 100000 AI)
+2025-10-19 19:59:34,567 - src.training.data_loader - INFO - Split: Train=140000, Val=20000, Test=40000
+2025-10-19 19:59:34,568 - src.training.data_loader - INFO - Train - Human: 70000, AI: 70000
+2025-10-19 19:59:34,568 - src.training.data_loader - INFO - Val   - Human: 10000, AI: 10000
+2025-10-19 19:59:34,568 - src.training.data_loader - INFO - Test  - Human: 20000, AI: 20000
+2025-10-19 19:59:34,581 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 19:59:34,582 - __main__ - INFO -   Train: 140000
+2025-10-19 19:59:34,582 - __main__ - INFO -   Val:   20000
+2025-10-19 19:59:34,582 - __main__ - INFO -   Test:  40000
+2025-10-19 19:59:34,583 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:59:34,583 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 19:59:34,583 - __main__ - INFO - ================================================================================
+2025-10-19 19:59:36,753 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_4.4M/checkpoints
+2025-10-19 19:59:36,753 - src.training.train - INFO - Using safetensors format
+2025-10-19 19:59:36,753 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_4.4M/models
+2025-10-19 19:59:36,753 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 19:59:36,753 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 19:59:36,753 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 19:59:36,753 - __main__ - INFO - 
+================================================================================
+2025-10-19 19:59:36,753 - __main__ - INFO - Starting Training
+2025-10-19 19:59:36,753 - __main__ - INFO - ================================================================================
+2025-10-19 19:59:36,753 - src.training.train - INFO - Starting model training...
+2025-10-19 20:07:18,377 - __main__ - INFO - ================================================================================
+2025-10-19 20:07:18,377 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 20:07:18,377 - __main__ - INFO - ================================================================================
+2025-10-19 20:07:18,377 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 20:07:18,377 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 20:07:18,378 - __main__ - INFO - Training Configuration:
+2025-10-19 20:07:18,378 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 20:07:18,378 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 20:07:18,378 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 20:07:18,378 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 20:07:18,378 - __main__ - INFO -   attention_pooling: True
+2025-10-19 20:07:18,378 - __main__ - INFO -   dropout: 0.4
+2025-10-19 20:07:18,378 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 20:07:18,378 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 20:07:18,378 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 20:07:18,378 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 20:07:18,378 - __main__ - INFO -   max_steps: None
+2025-10-19 20:07:18,378 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 20:07:18,378 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 20:07:18,378 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 20:07:18,378 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 20:07:18,378 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 20:07:18,378 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 20:07:18,378 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 20:07:18,378 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 20:07:18,378 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 20:07:18,378 - __main__ - INFO -   fp16: False
+2025-10-19 20:07:18,378 - __main__ - INFO -   bf16: True
+2025-10-19 20:07:18,378 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 20:07:18,378 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 20:07:18,378 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 20:07:18,378 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 20:07:18,378 - __main__ - INFO -   use_ema: True
+2025-10-19 20:07:18,378 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 20:07:18,378 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 20:07:18,378 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 20:07:18,378 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 20:07:18,378 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 20:07:18,378 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 20:07:18,378 - __main__ - INFO -   logging_steps: 100
+2025-10-19 20:07:18,378 - __main__ - INFO -   device: cuda
+2025-10-19 20:07:18,378 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:07:18,378 - __main__ - INFO - Loading Data
+2025-10-19 20:07:18,378 - __main__ - INFO - ================================================================================
+2025-10-19 20:07:18,378 - __main__ - INFO - Processed Data Summary:
+2025-10-19 20:07:18,378 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 20:07:18,378 - __main__ - INFO -   human_samples: 817018
+2025-10-19 20:07:18,378 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 20:07:18,378 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 20:07:18,378 - __main__ - INFO -   domains: []
+2025-10-19 20:07:18,378 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 20:07:18,378 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 20:07:18,381 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 20:07:21,528 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 20:07:21,566 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 20:07:29,860 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 20:07:29,892 - src.training.data_loader - INFO - Downsampled to 100000 rows
+2025-10-19 20:07:30,036 - src.training.data_loader - INFO - Combined dataset: 200000 samples (100000 human, 100000 AI)
+2025-10-19 20:07:30,123 - src.training.data_loader - INFO - Split: Train=140000, Val=20000, Test=40000
+2025-10-19 20:07:30,123 - src.training.data_loader - INFO - Train - Human: 70000, AI: 70000
+2025-10-19 20:07:30,123 - src.training.data_loader - INFO - Val   - Human: 10000, AI: 10000
+2025-10-19 20:07:30,124 - src.training.data_loader - INFO - Test  - Human: 20000, AI: 20000
+2025-10-19 20:07:30,133 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 20:07:30,133 - __main__ - INFO -   Train: 140000
+2025-10-19 20:07:30,133 - __main__ - INFO -   Val:   20000
+2025-10-19 20:07:30,133 - __main__ - INFO -   Test:  40000
+2025-10-19 20:07:30,134 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:07:30,134 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 20:07:30,134 - __main__ - INFO - ================================================================================
+2025-10-19 20:07:32,655 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_200k/checkpoints
+2025-10-19 20:07:32,655 - src.training.train - INFO - Using safetensors format
+2025-10-19 20:07:32,655 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_200k/models
+2025-10-19 20:07:32,655 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 20:07:32,655 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 20:07:32,655 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 20:07:32,655 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:07:32,655 - __main__ - INFO - Starting Training
+2025-10-19 20:07:32,655 - __main__ - INFO - ================================================================================
+2025-10-19 20:07:32,655 - src.training.train - INFO - Starting model training...
+2025-10-19 20:10:15,522 - src.training.train - INFO - Step 100, Loss: 0.0683
+2025-10-19 20:12:57,176 - src.training.train - INFO - Step 200, Loss: 0.0500
+2025-10-19 20:14:32,225 - __main__ - INFO - ================================================================================
+2025-10-19 20:14:32,225 - __main__ - INFO - Starting AI Text Detection Model Training
+2025-10-19 20:14:32,225 - __main__ - INFO - ================================================================================
+2025-10-19 20:14:32,226 - __main__ - INFO - GPU available: Radeon RX 7900 GRE
+2025-10-19 20:14:32,226 - __main__ - INFO - GPU memory: 17.16 GB
+2025-10-19 20:14:32,226 - __main__ - INFO - Training Configuration:
+2025-10-19 20:14:32,226 - __main__ - INFO -   base_model: microsoft/deberta-v3-small
+2025-10-19 20:14:32,226 - __main__ - INFO -   freeze_embeddings: True
+2025-10-19 20:14:32,226 - __main__ - INFO -   lstm_layers: 2
+2025-10-19 20:14:32,226 - __main__ - INFO -   lstm_hidden_size: 512
+2025-10-19 20:14:32,226 - __main__ - INFO -   attention_pooling: True
+2025-10-19 20:14:32,226 - __main__ - INFO -   dropout: 0.4
+2025-10-19 20:14:32,226 - __main__ - INFO -   max_seq_length: 512
+2025-10-19 20:14:32,226 - __main__ - INFO -   per_device_train_batch_size: 16
+2025-10-19 20:14:32,226 - __main__ - INFO -   gradient_accumulation_steps: 4
+2025-10-19 20:14:32,226 - __main__ - INFO -   num_train_epochs: 5
+2025-10-19 20:14:32,226 - __main__ - INFO -   max_steps: None
+2025-10-19 20:14:32,226 - __main__ - INFO -   optimizer: AdamW
+2025-10-19 20:14:32,226 - __main__ - INFO -   learning_rate: 2e-05
+2025-10-19 20:14:32,226 - __main__ - INFO -   lstm_lr: 0.001
+2025-10-19 20:14:32,226 - __main__ - INFO -   weight_decay: 0.01
+2025-10-19 20:14:32,226 - __main__ - INFO -   adam_beta1: 0.9
+2025-10-19 20:14:32,226 - __main__ - INFO -   adam_beta2: 0.999
+2025-10-19 20:14:32,226 - __main__ - INFO -   adam_epsilon: 1e-08
+2025-10-19 20:14:32,226 - __main__ - INFO -   lr_scheduler_type: linear
+2025-10-19 20:14:32,226 - __main__ - INFO -   warmup_steps: 500
+2025-10-19 20:14:32,226 - __main__ - INFO -   fp16: False
+2025-10-19 20:14:32,226 - __main__ - INFO -   bf16: True
+2025-10-19 20:14:32,226 - __main__ - INFO -   max_grad_norm: 1.0
+2025-10-19 20:14:32,226 - __main__ - INFO -   label_smoothing: 0.1
+2025-10-19 20:14:32,226 - __main__ - INFO -   noise_injection_prob: 0.1
+2025-10-19 20:14:32,226 - __main__ - INFO -   back_translation_prob: 0.15
+2025-10-19 20:14:32,226 - __main__ - INFO -   use_ema: True
+2025-10-19 20:14:32,226 - __main__ - INFO -   ema_decay: 0.999
+2025-10-19 20:14:32,226 - __main__ - INFO -   early_stopping_patience: 3
+2025-10-19 20:14:32,226 - __main__ - INFO -   metric_for_best_model: eval_loss
+2025-10-19 20:14:32,226 - __main__ - INFO -   save_total_limit: 3
+2025-10-19 20:14:32,226 - __main__ - INFO -   save_strategy: epoch
+2025-10-19 20:14:32,226 - __main__ - INFO -   evaluation_strategy: epoch
+2025-10-19 20:14:32,226 - __main__ - INFO -   logging_steps: 100
+2025-10-19 20:14:32,226 - __main__ - INFO -   device: cuda
+2025-10-19 20:14:32,226 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:14:32,226 - __main__ - INFO - Loading Data
+2025-10-19 20:14:32,226 - __main__ - INFO - ================================================================================
+2025-10-19 20:14:32,226 - __main__ - INFO - Processed Data Summary:
+2025-10-19 20:14:32,226 - __main__ - INFO -   total_samples: 1689937
+2025-10-19 20:14:32,226 - __main__ - INFO -   human_samples: 817018
+2025-10-19 20:14:32,226 - __main__ - INFO -   ai_samples: 872919
+2025-10-19 20:14:32,226 - __main__ - INFO -   ai_models: ['ai_generated']
+2025-10-19 20:14:32,226 - __main__ - INFO -   domains: []
+2025-10-19 20:14:32,227 - __main__ - INFO -   text_length_stats: {'min': 239, 'max': 6044, 'mean': 2332.43235, 'median': 2162}
+2025-10-19 20:14:32,227 - __main__ - INFO - Loading data from all AI models...
+2025-10-19 20:14:32,229 - src.training.data_loader - INFO - Found parquet files in 14 categories
+2025-10-19 20:14:32,229 - src.training.data_loader - INFO -   gpt3: 43 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   mpt-chat: 57 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   mistral-chat: 56 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   gpt4: 43 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   cohere: 43 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   cohere-chat: 43 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   llama-chat: 56 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   mpt: 57 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   mistral: 56 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   gpt2: 56 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   unspecified: 10 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   chatgpt: 43 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   ai_generated: 20 files
+2025-10-19 20:14:32,230 - src.training.data_loader - INFO -   real_human: 20 files
+2025-10-19 20:14:35,380 - src.training.data_loader - INFO - Loaded total 872919 rows from 20 files
+2025-10-19 20:14:35,425 - src.training.data_loader - INFO - Downsampled to 140000 rows
+2025-10-19 20:14:43,733 - src.training.data_loader - INFO - Loaded total 999586 rows from 20 files
+2025-10-19 20:14:43,769 - src.training.data_loader - INFO - Downsampled to 140000 rows
+2025-10-19 20:14:43,964 - src.training.data_loader - INFO - Combined dataset: 280000 samples (140000 human, 140000 AI)
+2025-10-19 20:14:44,079 - src.training.data_loader - INFO - Split: Train=196000, Val=28000, Test=56000
+2025-10-19 20:14:44,080 - src.training.data_loader - INFO - Train - Human: 98000, AI: 98000
+2025-10-19 20:14:44,080 - src.training.data_loader - INFO - Val   - Human: 14000, AI: 14000
+2025-10-19 20:14:44,080 - src.training.data_loader - INFO - Test  - Human: 28000, AI: 28000
+2025-10-19 20:14:44,097 - __main__ - INFO - 
+Dataset sizes:
+2025-10-19 20:14:44,097 - __main__ - INFO -   Train: 196000
+2025-10-19 20:14:44,097 - __main__ - INFO -   Val:   28000
+2025-10-19 20:14:44,097 - __main__ - INFO -   Test:  56000
+2025-10-19 20:14:44,098 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:14:44,098 - __main__ - INFO - Initializing Model Trainer
+2025-10-19 20:14:44,098 - __main__ - INFO - ================================================================================
+2025-10-19 20:14:46,570 - src.training.train - INFO - CheckpointManager initialized at outputs/balanced_280k/checkpoints
+2025-10-19 20:14:46,570 - src.training.train - INFO - Using safetensors format
+2025-10-19 20:14:46,570 - src.training.train - INFO - ModelSaver initialized at outputs/balanced_280k/models
+2025-10-19 20:14:46,570 - src.training.train - INFO - Model initialized on device: cuda
+2025-10-19 20:14:46,571 - src.training.train - INFO - Total parameters: 152,858,115
+2025-10-19 20:14:46,571 - src.training.train - INFO - Trainable parameters: 54,475,779
+2025-10-19 20:14:46,571 - __main__ - INFO - 
+================================================================================
+2025-10-19 20:14:46,571 - __main__ - INFO - Starting Training
+2025-10-19 20:14:46,571 - __main__ - INFO - ================================================================================
+2025-10-19 20:14:46,571 - src.training.train - INFO - Starting model training...
+2025-10-19 20:17:28,841 - src.training.train - INFO - Step 100, Loss: 0.0511
+2025-10-19 20:20:09,994 - src.training.train - INFO - Step 200, Loss: 0.0506
+2025-10-19 20:22:55,754 - src.training.train - INFO - Step 300, Loss: 0.0541
+2025-10-19 20:25:37,645 - src.training.train - INFO - Step 400, Loss: 0.0955
+2025-10-19 20:28:19,704 - src.training.train - INFO - Step 500, Loss: 0.0500
+2025-10-19 20:31:01,454 - src.training.train - INFO - Step 600, Loss: 0.0501
+2025-10-19 20:33:43,297 - src.training.train - INFO - Step 700, Loss: 0.0511
+2025-10-19 20:36:25,465 - src.training.train - INFO - Step 800, Loss: 0.0503
+2025-10-19 20:39:07,777 - src.training.train - INFO - Step 900, Loss: 0.0497
+2025-10-19 20:41:49,837 - src.training.train - INFO - Step 1000, Loss: 0.0497
+2025-10-19 20:44:31,900 - src.training.train - INFO - Step 1100, Loss: 0.0497
+2025-10-19 20:47:13,659 - src.training.train - INFO - Step 1200, Loss: 0.0497
+2025-10-19 20:49:55,613 - src.training.train - INFO - Step 1300, Loss: 0.0497
+2025-10-19 20:52:37,638 - src.training.train - INFO - Step 1400, Loss: 0.0497
+2025-10-19 20:55:19,530 - src.training.train - INFO - Step 1500, Loss: 0.0497
+2025-10-19 20:58:01,532 - src.training.train - INFO - Step 1600, Loss: 0.0497
+2025-10-19 21:00:43,470 - src.training.train - INFO - Step 1700, Loss: 0.0496
+2025-10-19 21:03:25,228 - src.training.train - INFO - Step 1800, Loss: 0.0497
+2025-10-19 21:06:07,024 - src.training.train - INFO - Step 1900, Loss: 0.0496
+2025-10-19 21:08:48,820 - src.training.train - INFO - Step 2000, Loss: 0.0497
+2025-10-19 21:11:30,762 - src.training.train - INFO - Step 2100, Loss: 0.0497
+2025-10-19 21:14:12,563 - src.training.train - INFO - Step 2200, Loss: 0.0497
+2025-10-19 21:16:54,500 - src.training.train - INFO - Step 2300, Loss: 0.0496
+2025-10-19 21:19:36,345 - src.training.train - INFO - Step 2400, Loss: 0.0497
+2025-10-19 21:22:18,258 - src.training.train - INFO - Step 2500, Loss: 0.0497
+2025-10-19 21:25:00,093 - src.training.train - INFO - Step 2600, Loss: 0.0497
+2025-10-19 21:27:41,826 - src.training.train - INFO - Step 2700, Loss: 0.0497
+2025-10-19 21:30:23,624 - src.training.train - INFO - Step 2800, Loss: 0.0497
+2025-10-19 21:33:05,600 - src.training.train - INFO - Step 2900, Loss: 0.0497
+2025-10-19 21:35:47,694 - src.training.train - INFO - Step 3000, Loss: 0.0497
+2025-10-19 21:37:29,165 - src.training.train - INFO - Epoch 1/5 - Train Loss: 0.0530, Train F1: 0.9944
+2025-10-19 21:42:41,484 - src.training.train - INFO - Validation - Loss: 0.2009, F1: 0.9989, AUC: 1.0000
+2025-10-19 21:42:42,699 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_latest.safetensors
+2025-10-19 21:42:43,855 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_step_3062.safetensors
+2025-10-19 21:42:44,980 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_best_val_f1.safetensors
+2025-10-19 21:42:44,980 - src.training.train - INFO - New best checkpoint! val_f1=0.9989
+2025-10-19 21:42:44,980 - src.training.train - INFO - Saving best model for inference...
+2025-10-19 21:42:44,981 - src.training.train - INFO - Saving inference model to outputs/balanced_280k/models/inference/model_v1.0_epoch1
+2025-10-19 21:42:45,581 - src.training.train - INFO - DeBERTa backbone saved in HuggingFace format
+2025-10-19 21:42:46,098 - src.training.train - INFO - Full model saved to outputs/balanced_280k/models/inference/model_v1.0_epoch1/full_model.pt
+2025-10-19 21:42:46,128 - src.training.train - INFO - Tokenizer saved
+2025-10-19 21:42:46,128 - src.training.train - INFO - Metadata saved to outputs/balanced_280k/models/inference/model_v1.0_epoch1/training_metadata.json
+2025-10-19 21:42:46,128 - src.training.train - INFO - README saved to outputs/balanced_280k/models/inference/model_v1.0_epoch1/README.md
+2025-10-19 21:42:46,128 - src.training.train - INFO - ✓ Inference model successfully saved to outputs/balanced_280k/models/inference/model_v1.0_epoch1
+2025-10-19 21:43:47,705 - src.training.train - INFO - Step 3100, Loss: 0.0497
+2025-10-19 21:46:29,628 - src.training.train - INFO - Step 3200, Loss: 0.0497
+2025-10-19 21:49:11,511 - src.training.train - INFO - Step 3300, Loss: 0.0497
+2025-10-19 21:51:53,404 - src.training.train - INFO - Step 3400, Loss: 0.0496
+2025-10-19 21:54:35,287 - src.training.train - INFO - Step 3500, Loss: 0.0497
+2025-10-19 21:57:17,041 - src.training.train - INFO - Step 3600, Loss: 0.0497
+2025-10-19 21:59:58,873 - src.training.train - INFO - Step 3700, Loss: 0.0497
+2025-10-19 22:02:40,745 - src.training.train - INFO - Step 3800, Loss: 0.0497
+2025-10-19 22:05:22,557 - src.training.train - INFO - Step 3900, Loss: 0.0496
+2025-10-19 22:08:04,362 - src.training.train - INFO - Step 4000, Loss: 0.0497
+2025-10-19 22:10:46,182 - src.training.train - INFO - Step 4100, Loss: 0.0902
+2025-10-19 22:13:27,946 - src.training.train - INFO - Step 4200, Loss: 0.0497
+2025-10-19 22:16:09,760 - src.training.train - INFO - Step 4300, Loss: 0.0496
+2025-10-19 22:18:51,604 - src.training.train - INFO - Step 4400, Loss: 0.0497
+2025-10-19 22:21:33,389 - src.training.train - INFO - Step 4500, Loss: 0.0497
+2025-10-19 22:24:15,194 - src.training.train - INFO - Step 4600, Loss: 0.0497
+2025-10-19 22:26:56,969 - src.training.train - INFO - Step 4700, Loss: 0.0497
+2025-10-19 22:29:38,760 - src.training.train - INFO - Step 4800, Loss: 0.0497
+2025-10-19 22:32:20,486 - src.training.train - INFO - Step 4900, Loss: 0.0497
+2025-10-19 22:35:02,262 - src.training.train - INFO - Step 5000, Loss: 0.0497
+2025-10-19 22:37:44,038 - src.training.train - INFO - Step 5100, Loss: 0.0496
+2025-10-19 22:40:25,927 - src.training.train - INFO - Step 5200, Loss: 0.0497
+2025-10-19 22:43:07,759 - src.training.train - INFO - Step 5300, Loss: 0.0497
+2025-10-19 22:45:49,610 - src.training.train - INFO - Step 5400, Loss: 0.0497
+2025-10-19 22:48:31,404 - src.training.train - INFO - Step 5500, Loss: 0.0497
+2025-10-19 22:51:13,216 - src.training.train - INFO - Step 5600, Loss: 0.0497
+2025-10-19 22:53:55,090 - src.training.train - INFO - Step 5700, Loss: 0.0497
+2025-10-19 22:56:36,947 - src.training.train - INFO - Step 5800, Loss: 0.0497
+2025-10-19 22:59:19,164 - src.training.train - INFO - Step 5900, Loss: 0.0497
+2025-10-19 23:02:01,264 - src.training.train - INFO - Step 6000, Loss: 0.0497
+2025-10-19 23:04:43,410 - src.training.train - INFO - Step 6100, Loss: 0.0497
+2025-10-19 23:05:23,273 - src.training.train - INFO - Epoch 2/5 - Train Loss: 0.0499, Train F1: 0.9996
+2025-10-19 23:10:35,274 - src.training.train - INFO - Validation - Loss: 0.1997, F1: 0.9995, AUC: 0.9995
+2025-10-19 23:10:36,962 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_latest.safetensors
+2025-10-19 23:10:38,176 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_step_6124.safetensors
+2025-10-19 23:10:39,749 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_best_val_f1.safetensors
+2025-10-19 23:10:39,749 - src.training.train - INFO - New best checkpoint! val_f1=0.9995
+2025-10-19 23:10:39,749 - src.training.train - INFO - Saving best model for inference...
+2025-10-19 23:10:39,749 - src.training.train - INFO - Saving inference model to outputs/balanced_280k/models/inference/model_v1.0_epoch2
+2025-10-19 23:10:40,366 - src.training.train - INFO - DeBERTa backbone saved in HuggingFace format
+2025-10-19 23:10:40,878 - src.training.train - INFO - Full model saved to outputs/balanced_280k/models/inference/model_v1.0_epoch2/full_model.pt
+2025-10-19 23:10:40,903 - src.training.train - INFO - Tokenizer saved
+2025-10-19 23:10:40,903 - src.training.train - INFO - Metadata saved to outputs/balanced_280k/models/inference/model_v1.0_epoch2/training_metadata.json
+2025-10-19 23:10:40,903 - src.training.train - INFO - README saved to outputs/balanced_280k/models/inference/model_v1.0_epoch2/README.md
+2025-10-19 23:10:40,903 - src.training.train - INFO - ✓ Inference model successfully saved to outputs/balanced_280k/models/inference/model_v1.0_epoch2
+2025-10-19 23:12:44,068 - src.training.train - INFO - Step 6200, Loss: 0.0497
+2025-10-19 23:15:26,071 - src.training.train - INFO - Step 6300, Loss: 0.0497
+2025-10-19 23:18:08,090 - src.training.train - INFO - Step 6400, Loss: 0.0496
+2025-10-19 23:20:50,034 - src.training.train - INFO - Step 6500, Loss: 0.0497
+2025-10-19 23:23:32,043 - src.training.train - INFO - Step 6600, Loss: 0.0497
+2025-10-19 23:26:14,072 - src.training.train - INFO - Step 6700, Loss: 0.0497
+2025-10-19 23:28:56,049 - src.training.train - INFO - Step 6800, Loss: 0.0497
+2025-10-19 23:31:38,050 - src.training.train - INFO - Step 6900, Loss: 0.0496
+2025-10-19 23:34:20,080 - src.training.train - INFO - Step 7000, Loss: 0.0497
+2025-10-19 23:37:02,036 - src.training.train - INFO - Step 7100, Loss: 0.0497
+2025-10-19 23:39:44,044 - src.training.train - INFO - Step 7200, Loss: 0.0497
+2025-10-19 23:42:26,063 - src.training.train - INFO - Step 7300, Loss: 0.0497
+2025-10-19 23:45:08,120 - src.training.train - INFO - Step 7400, Loss: 0.0496
+2025-10-19 23:47:50,220 - src.training.train - INFO - Step 7500, Loss: 0.0497
+2025-10-19 23:50:32,281 - src.training.train - INFO - Step 7600, Loss: 0.0497
+2025-10-19 23:53:14,256 - src.training.train - INFO - Step 7700, Loss: 0.0497
+2025-10-19 23:55:56,236 - src.training.train - INFO - Step 7800, Loss: 0.0497
+2025-10-19 23:58:38,234 - src.training.train - INFO - Step 7900, Loss: 0.0497
+2025-10-20 00:01:20,162 - src.training.train - INFO - Step 8000, Loss: 0.0497
+2025-10-20 00:04:02,233 - src.training.train - INFO - Step 8100, Loss: 0.0497
+2025-10-20 00:06:44,241 - src.training.train - INFO - Step 8200, Loss: 0.0497
+2025-10-20 00:09:26,327 - src.training.train - INFO - Step 8300, Loss: 0.0497
+2025-10-20 00:12:08,429 - src.training.train - INFO - Step 8400, Loss: 0.0497
+2025-10-20 00:14:50,590 - src.training.train - INFO - Step 8500, Loss: 0.0497
+2025-10-20 00:17:32,737 - src.training.train - INFO - Step 8600, Loss: 0.0497
+2025-10-20 00:20:14,822 - src.training.train - INFO - Step 8700, Loss: 0.0497
+2025-10-20 00:22:57,029 - src.training.train - INFO - Step 8800, Loss: 0.0497
+2025-10-20 00:25:39,118 - src.training.train - INFO - Step 8900, Loss: 0.0497
+2025-10-20 00:28:21,256 - src.training.train - INFO - Step 9000, Loss: 0.0497
+2025-10-20 00:31:03,441 - src.training.train - INFO - Step 9100, Loss: 0.0496
+2025-10-20 00:33:23,825 - src.training.train - INFO - Epoch 3/5 - Train Loss: 0.0498, Train F1: 0.9998
+2025-10-20 00:38:36,123 - src.training.train - INFO - Validation - Loss: 0.1996, F1: 0.9995, AUC: 0.9999
+2025-10-20 00:38:37,897 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_latest.safetensors
+2025-10-20 00:38:39,157 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_step_9186.safetensors
+2025-10-20 00:39:01,856 - src.training.train - INFO - Step 9200, Loss: 0.0497
+2025-10-20 00:41:43,798 - src.training.train - INFO - Step 9300, Loss: 0.0497
+2025-10-20 00:44:25,789 - src.training.train - INFO - Step 9400, Loss: 0.0497
+2025-10-20 00:47:07,825 - src.training.train - INFO - Step 9500, Loss: 0.0497
+2025-10-20 00:49:49,813 - src.training.train - INFO - Step 9600, Loss: 0.0497
+2025-10-20 00:52:31,845 - src.training.train - INFO - Step 9700, Loss: 0.0497
+2025-10-20 00:55:13,943 - src.training.train - INFO - Step 9800, Loss: 0.0497
+2025-10-20 00:57:56,032 - src.training.train - INFO - Step 9900, Loss: 0.0497
+2025-10-20 01:00:38,196 - src.training.train - INFO - Step 10000, Loss: 0.0497
+2025-10-20 01:03:20,300 - src.training.train - INFO - Step 10100, Loss: 0.0497
+2025-10-20 01:06:02,536 - src.training.train - INFO - Step 10200, Loss: 0.0497
+2025-10-20 01:08:44,731 - src.training.train - INFO - Step 10300, Loss: 0.0497
+2025-10-20 01:11:26,895 - src.training.train - INFO - Step 10400, Loss: 0.0497
+2025-10-20 01:14:09,008 - src.training.train - INFO - Step 10500, Loss: 0.0497
+2025-10-20 01:16:51,120 - src.training.train - INFO - Step 10600, Loss: 0.0497
+2025-10-20 01:19:33,193 - src.training.train - INFO - Step 10700, Loss: 0.0497
+2025-10-20 01:22:15,255 - src.training.train - INFO - Step 10800, Loss: 0.0497
+2025-10-20 01:24:57,367 - src.training.train - INFO - Step 10900, Loss: 0.0497
+2025-10-20 01:27:39,456 - src.training.train - INFO - Step 11000, Loss: 0.0497
+2025-10-20 01:30:21,677 - src.training.train - INFO - Step 11100, Loss: 0.0497
+2025-10-20 01:33:03,811 - src.training.train - INFO - Step 11200, Loss: 0.0496
+2025-10-20 01:35:45,994 - src.training.train - INFO - Step 11300, Loss: 0.0496
+2025-10-20 01:38:28,225 - src.training.train - INFO - Step 11400, Loss: 0.0497
+2025-10-20 01:41:10,468 - src.training.train - INFO - Step 11500, Loss: 0.0497
+2025-10-20 01:43:52,788 - src.training.train - INFO - Step 11600, Loss: 0.0497
+2025-10-20 01:46:35,129 - src.training.train - INFO - Step 11700, Loss: 0.0497
+2025-10-20 01:49:17,493 - src.training.train - INFO - Step 11800, Loss: 0.0497
+2025-10-20 01:51:59,776 - src.training.train - INFO - Step 11900, Loss: 0.0497
+2025-10-20 01:54:42,016 - src.training.train - INFO - Step 12000, Loss: 0.0497
+2025-10-20 01:57:24,245 - src.training.train - INFO - Step 12100, Loss: 0.0497
+2025-10-20 02:00:06,554 - src.training.train - INFO - Step 12200, Loss: 0.0497
+2025-10-20 02:01:25,390 - src.training.train - INFO - Epoch 4/5 - Train Loss: 0.0498, Train F1: 0.9998
+2025-10-20 02:06:37,653 - src.training.train - INFO - Validation - Loss: 0.2000, F1: 0.9994, AUC: 0.9998
+2025-10-20 02:06:42,442 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_latest.safetensors
+2025-10-20 02:06:43,617 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_step_12248.safetensors
+2025-10-20 02:06:43,689 - src.training.train - INFO - Removed old checkpoint: outputs/balanced_280k/checkpoints/checkpoint_step_3062.safetensors
+2025-10-20 02:08:08,059 - src.training.train - INFO - Step 12300, Loss: 0.0496
+2025-10-20 02:10:50,215 - src.training.train - INFO - Step 12400, Loss: 0.0497
+2025-10-20 02:13:32,485 - src.training.train - INFO - Step 12500, Loss: 0.0496
+2025-10-20 02:16:14,665 - src.training.train - INFO - Step 12600, Loss: 0.0497
+2025-10-20 02:18:56,825 - src.training.train - INFO - Step 12700, Loss: 0.0497
+2025-10-20 02:21:38,945 - src.training.train - INFO - Step 12800, Loss: 0.0497
+2025-10-20 02:24:21,121 - src.training.train - INFO - Step 12900, Loss: 0.0496
+2025-10-20 02:27:03,305 - src.training.train - INFO - Step 13000, Loss: 0.0497
+2025-10-20 02:29:45,429 - src.training.train - INFO - Step 13100, Loss: 0.0497
+2025-10-20 02:32:27,574 - src.training.train - INFO - Step 13200, Loss: 0.0496
+2025-10-20 02:35:09,683 - src.training.train - INFO - Step 13300, Loss: 0.0497
+2025-10-20 02:37:51,894 - src.training.train - INFO - Step 13400, Loss: 0.0497
+2025-10-20 02:40:34,035 - src.training.train - INFO - Step 13500, Loss: 0.0497
+2025-10-20 02:43:16,205 - src.training.train - INFO - Step 13600, Loss: 0.0497
+2025-10-20 02:45:58,208 - src.training.train - INFO - Step 13700, Loss: 0.0497
+2025-10-20 02:48:40,376 - src.training.train - INFO - Step 13800, Loss: 0.0497
+2025-10-20 02:51:22,608 - src.training.train - INFO - Step 13900, Loss: 0.0497
+2025-10-20 02:54:04,814 - src.training.train - INFO - Step 14000, Loss: 0.0497
+2025-10-20 02:56:47,103 - src.training.train - INFO - Step 14100, Loss: 0.0496
+2025-10-20 02:59:29,261 - src.training.train - INFO - Step 14200, Loss: 0.0497
+2025-10-20 03:02:11,488 - src.training.train - INFO - Step 14300, Loss: 0.0497
+2025-10-20 03:04:53,765 - src.training.train - INFO - Step 14400, Loss: 0.0497
+2025-10-20 03:07:36,020 - src.training.train - INFO - Step 14500, Loss: 0.0496
+2025-10-20 03:10:18,346 - src.training.train - INFO - Step 14600, Loss: 0.0497
+2025-10-20 03:13:00,785 - src.training.train - INFO - Step 14700, Loss: 0.0497
+2025-10-20 03:15:43,071 - src.training.train - INFO - Step 14800, Loss: 0.0497
+2025-10-20 03:18:25,334 - src.training.train - INFO - Step 14900, Loss: 0.0497
+2025-10-20 03:21:07,646 - src.training.train - INFO - Step 15000, Loss: 0.0497
+2025-10-20 03:23:49,983 - src.training.train - INFO - Step 15100, Loss: 0.0497
+2025-10-20 03:26:32,246 - src.training.train - INFO - Step 15200, Loss: 0.0497
+2025-10-20 03:29:14,550 - src.training.train - INFO - Step 15300, Loss: 0.0497
+2025-10-20 03:29:31,760 - src.training.train - INFO - Epoch 5/5 - Train Loss: 0.0497, Train F1: 0.9999
+2025-10-20 03:34:43,941 - src.training.train - INFO - Validation - Loss: 0.1996, F1: 0.9995, AUC: 0.9997
+2025-10-20 03:34:45,824 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_latest.safetensors
+2025-10-20 03:34:46,986 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_epoch_5.safetensors
+2025-10-20 03:34:48,160 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_step_15310.safetensors
+2025-10-20 03:34:49,749 - src.training.train - INFO - Checkpoint saved: outputs/balanced_280k/checkpoints/checkpoint_best_val_f1.safetensors
+2025-10-20 03:34:49,749 - src.training.train - INFO - New best checkpoint! val_f1=0.9995
+2025-10-20 03:34:49,889 - src.training.train - INFO - Removed old checkpoint: outputs/balanced_280k/checkpoints/checkpoint_step_12248.safetensors
+2025-10-20 03:34:49,889 - src.training.train - INFO - Saving best model for inference...
+2025-10-20 03:34:49,890 - src.training.train - INFO - Saving inference model to outputs/balanced_280k/models/inference/model_v1.0_epoch5
+2025-10-20 03:34:50,530 - src.training.train - INFO - DeBERTa backbone saved in HuggingFace format
+2025-10-20 03:34:51,042 - src.training.train - INFO - Full model saved to outputs/balanced_280k/models/inference/model_v1.0_epoch5/full_model.pt
+2025-10-20 03:34:51,064 - src.training.train - INFO - Tokenizer saved
+2025-10-20 03:34:51,064 - src.training.train - INFO - Metadata saved to outputs/balanced_280k/models/inference/model_v1.0_epoch5/training_metadata.json
+2025-10-20 03:34:51,064 - src.training.train - INFO - README saved to outputs/balanced_280k/models/inference/model_v1.0_epoch5/README.md
+2025-10-20 03:34:51,064 - src.training.train - INFO - ✓ Inference model successfully saved to outputs/balanced_280k/models/inference/model_v1.0_epoch5
+2025-10-20 03:34:51,064 - src.training.train - INFO - Training completed! Saving final inference model...
+2025-10-20 03:34:51,064 - src.training.train - INFO - Saving inference model to outputs/balanced_280k/models/inference/model_v1.0_final
+2025-10-20 03:34:51,688 - src.training.train - INFO - DeBERTa backbone saved in HuggingFace format
+2025-10-20 03:34:52,228 - src.training.train - INFO - Full model saved to outputs/balanced_280k/models/inference/model_v1.0_final/full_model.pt
+2025-10-20 03:34:52,243 - src.training.train - INFO - Tokenizer saved
+2025-10-20 03:34:52,243 - src.training.train - INFO - Metadata saved to outputs/balanced_280k/models/inference/model_v1.0_final/training_metadata.json
+2025-10-20 03:34:52,243 - src.training.train - INFO - README saved to outputs/balanced_280k/models/inference/model_v1.0_final/README.md
+2025-10-20 03:34:52,243 - src.training.train - INFO - ✓ Inference model successfully saved to outputs/balanced_280k/models/inference/model_v1.0_final
+2025-10-20 03:34:52,243 - src.training.train - INFO - ================================================================================
+2025-10-20 03:34:52,243 - src.training.train - INFO - Training Summary:
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Total epochs: 5
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Total steps: 15310
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Best validation F1: 0.9995
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Best validation loss: 0.1996
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Checkpoints saved in: outputs/balanced_280k/checkpoints
+2025-10-20 03:34:52,243 - src.training.train - INFO -   Inference models saved in: outputs/balanced_280k/models/inference
+2025-10-20 03:34:52,243 - src.training.train - INFO - ================================================================================
+2025-10-20 03:34:52,596 - __main__ - INFO - 
+================================================================================
+2025-10-20 03:34:52,601 - __main__ - INFO - Saving Training Results
+2025-10-20 03:34:52,601 - __main__ - INFO - ================================================================================
+2025-10-20 03:34:52,602 - __main__ - INFO - Results saved to outputs/balanced_280k/results.json
+2025-10-20 03:34:52,602 - src.training.train - WARNING - save_checkpoint is deprecated. Use checkpoint_manager.save_checkpoint instead.
+2025-10-20 03:34:53,310 - src.training.train - INFO - Checkpoint saved to outputs/balanced_280k/final_model.pt
+2025-10-20 03:34:53,310 - __main__ - INFO - 
+================================================================================
+2025-10-20 03:34:53,311 - __main__ - INFO - Training Complete!
+2025-10-20 03:34:53,311 - __main__ - INFO - ================================================================================
+2025-10-20 03:34:53,311 - __main__ - INFO - Output directory: outputs/balanced_280k
+2025-10-20 03:34:53,311 - __main__ - INFO - Best validation loss: 0.1996
