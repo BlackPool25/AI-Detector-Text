@@ -56,11 +56,6 @@ results/
 runs/
 checkpoints/
 
-# Modal / local mounts and generated files
-.modal/
-modal_*.py
-mounts/
-
 # Misc
 *.sqlite3
 *.db
